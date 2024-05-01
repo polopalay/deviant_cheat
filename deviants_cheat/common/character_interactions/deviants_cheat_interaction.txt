@@ -47,7 +47,6 @@ deviants_switch_character = {
 
 deviants_add_character = {
 	icon = deviantshostage
-	common_interaction = no
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -75,7 +74,6 @@ deviants_add_character = {
 
 deviants_imprison = {
 	icon = deviantsprison
-	common_interaction = no
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -99,7 +97,6 @@ deviants_imprison = {
 
 deviants_vassal_inter = {
 	icon = deviantsdiplomacy
-	common_interaction = no
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -123,7 +120,6 @@ deviants_vassal_inter = {
 
 deviants_revoke_character = {
 	icon  = deviantseconomy
-	common_interaction = no
 	use_diplomatic_range = no
 	auto_accept = yes
 	ignores_pending_interaction_block = yes
@@ -154,7 +150,6 @@ deviants_revoke_character = {
 
 deviants_befriend_character = {
 	icon = deviantsfertility
-	common_interaction = no
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -181,9 +176,36 @@ deviants_befriend_character = {
 	}
 }
 
+deviants_lover_character = {
+	icon = deviantslove
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:actor = { 
+			is_ai = no
+			NOR = {
+				has_relation_lover = scope:recipient
+				has_relation_soulmate = scope:recipient
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor = {		
+			if = { 
+				limit = { has_relation_lover = scope:recipient }
+				set_relation_soulmate = scope:recipient
+			}
+			else = { set_relation_lover = scope:recipient }
+		}
+	}
+}
+
 deviants_remove_rival = {
 	icon = deviantsprowess
-	common_interaction = no
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -205,7 +227,6 @@ deviants_remove_rival = {
 
 deviants_create_hook = {
 	icon = deviantscontrol
-	common_interaction = no
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
