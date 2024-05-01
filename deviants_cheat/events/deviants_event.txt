@@ -9,30 +9,6 @@ deviants_events.1 = {
 		character = scope:currency_scope
 		animation = personality_greedy
 	}
-	option = {
-		trigger = {
-			scope:currency_scope = {
-				is_landed = yes
-			}
-		}
-		name = deviants_add_tyranny
-		scope:currency_scope = {
-			add_tyranny = 10
-		}
-		trigger_event = deviants_events.1
-	}
-	option = {
-		trigger = {
-			scope:currency_scope = {
-				is_landed = yes
-			}
-		}
-		name = deviants_sub_tyranny
-		scope:currency_scope = {
-			add_tyranny = -10
-		}
-		trigger_event = deviants_events.1
-	}
 
 	option = {
 		trigger = {

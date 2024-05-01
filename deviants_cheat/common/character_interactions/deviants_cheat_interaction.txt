@@ -24,7 +24,7 @@ deviants_change_interactions = {
 
 deviants_switch_character = {
 	icon = deviantsmask
-	common_interaction = no
+	common_interaction = yes
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -161,89 +161,22 @@ deviants_befriend_character = {
 
 	is_shown = {
 		NOT = { scope:recipient = scope:actor }
-		scope:actor = {
+		scope:actor = { 
 			is_ai = no
-			NOT = { has_relation_friend = scope:recipient }
-		}
-	}
-
-	on_accept = {
-		scope:actor = {		
-			set_relation_friend = scope:recipient
-		}
-	}
-}
-
-deviants_be_best_friend_character = {
-	icon = deviantsfertility
-	common_interaction = no
-	auto_accept = yes
-	use_diplomatic_range = no
-	ignores_pending_interaction_block = yes
-
-	is_shown = {
-		NOT = { scope:recipient = scope:actor }
-		scope:actor = {
-			is_ai = no
-			NOT = { has_relation_best_friend = scope:recipient }
-			has_relation_friend = scope:recipient
-		}
-	}
-
-	on_accept = {
-		scope:actor = {		
-			set_relation_best_friend = scope:recipient
-		}
-	}
-}
-
-deviants_unfriend_character = {
-	icon = deviantsfertility
-	common_interaction = no
-	auto_accept = yes
-	use_diplomatic_range = no
-	ignores_pending_interaction_block = yes
-
-	is_shown = {
-		NOT = { scope:recipient = scope:actor }
-		scope:actor = {
-			is_ai = no
-			has_relation_friend = scope:recipient
-		}
-	}
-
-	on_accept = {
-		scope:actor = {		
-			remove_relation_friend = scope:recipient
-		}
-	}
-}
-
-deviants_add_rival = {
-	icon = deviantsprowess
-	common_interaction = no
-	auto_accept = yes
-	use_diplomatic_range = no
-	ignores_pending_interaction_block = yes
-
-	is_shown = {
-		scope:actor = {
-			is_ai = no
-		}
-		NOT = { scope:recipient = scope:actor }
-		NOT = {
-			scope:actor = {
-				any_relation = {
-				type = rival
-					this = scope:recipient
-				}
+			NOR = {
+				has_relation_friend = scope:recipient
+				has_relation_best_friend = scope:recipient
 			}
 		}
 	}
 
 	on_accept = {
-		scope:actor = {
-			set_relation_rival = scope:recipient
+		scope:actor = {		
+			if = { 
+				limit = { has_relation_friend = scope:recipient }
+				set_relation_best_friend = scope:recipient
+			}
+			else = { set_relation_friend = scope:recipient }
 		}
 	}
 }
