@@ -1,5 +1,5 @@
 deviants_change_interactions = {
-	icon = dfull_body
+	icon = d_full_body
 	common_interaction = yes
 	auto_accept = yes
 	use_diplomatic_range = no
@@ -23,7 +23,7 @@ deviants_change_interactions = {
 }
 
 deviants_switch_character = {
-	icon = dswitch
+	icon = d_switch
 	common_interaction = yes
 	auto_accept = yes
 	use_diplomatic_range = no
@@ -35,6 +35,7 @@ deviants_switch_character = {
 		}
 		scope:recipient = {
 			is_ai = yes
+			is_ruler = yes
 		}
 	}
 
@@ -46,7 +47,7 @@ deviants_switch_character = {
 }
 
 deviants_add_character = {
-	icon = dinvite_to_court
+	icon = d_invite_to_court
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -54,6 +55,7 @@ deviants_add_character = {
 	is_shown = {
 		NOT = { scope:recipient = scope:actor }
 		scope:recipient = {
+			is_ruler = no
 			is_landed = no
 			NOT = {
 				is_courtier_of = scope:actor
@@ -73,7 +75,7 @@ deviants_add_character = {
 }
 
 deviants_imprison = {
-	icon = dimprison
+	icon = d_imprison
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -96,17 +98,18 @@ deviants_imprison = {
 }
 
 deviants_vassal_inter = {
-	icon = dvassal
+	icon = d_vassal
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
 	
 	is_shown = {
+		NOT = { scope:recipient = scope:actor }
 		scope:recipient = {
-			NOT = { this = scope:actor }
 			is_landed = yes
 			highest_held_title_tier < scope:actor.highest_held_title_tier
 			NOT = { government_has_flag = can_not_be_vassal_or_liege }
+			NOT = { is_vassal_of = scope:actor }
 		}
 		scope:actor = {
 			is_ai = no
@@ -119,7 +122,7 @@ deviants_vassal_inter = {
 }
 
 deviants_revoke_character = {
-	icon  = drevoke_title
+	icon  = d_revoke_title
 	use_diplomatic_range = no
 	auto_accept = yes
 	ignores_pending_interaction_block = yes
@@ -149,7 +152,7 @@ deviants_revoke_character = {
 }
 
 deviants_befriend_character = {
-	icon = dfriend
+	icon = d_friend
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -177,7 +180,7 @@ deviants_befriend_character = {
 }
 
 deviants_lover_character = {
-	icon = dsex
+	icon = d_sex
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -205,7 +208,7 @@ deviants_lover_character = {
 }
 
 deviants_remove_rival = {
-	icon = dhostile
+	icon = d_hostile
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -226,7 +229,7 @@ deviants_remove_rival = {
 }
 
 deviants_create_hook = {
-	icon = dfabricate_hook
+	icon = d_fabricate_hook
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
