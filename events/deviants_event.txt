@@ -9,13 +9,16 @@ deviants_events.1 = {
 		character = scope:currency_scope
 		animation = personality_greedy
 	}
+	option = {
+		name = deviants_remove_status
+		scope:currency_scope = {
+			remove_character_modifier = deviants_fuckedsilly
+			remove_character_flag = has_reading_glasses
+		}
+		trigger_event = deviants_events.1
+	}
 
 	option = {
-		trigger = {
-			scope:currency_scope = {
-				is_landed = yes
-			}
-		}
 		name = deviants_add_weight
 		scope:currency_scope = {
 			change_current_weight = 10
@@ -24,11 +27,6 @@ deviants_events.1 = {
 	}
 
 	option = {
-		trigger = {
-			scope:currency_scope = {
-				is_landed = yes
-			}
-		}
 		name = deviants_sub_weight
 		scope:currency_scope = {
 			change_current_weight = -10
@@ -42,7 +40,6 @@ deviants_events.1 = {
                        		NOT = {
                                		any_secret = { secret_type = secret_deviant }
                                		any_secret = { secret_type = secret_witch }
-                               		any_secret = { secret_type = secret_cannibal }
                 		}
 			}
 		}
@@ -52,9 +49,6 @@ deviants_events.1 = {
 				}
 				add_secret = { 
 					type = secret_witch
-				}
-				add_secret = { 
-					type = secret_cannibal
 				}
 		}
 		trigger_event = deviants_events.1

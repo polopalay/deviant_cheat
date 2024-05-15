@@ -47,7 +47,7 @@ deviants_switch_character = {
 }
 
 deviants_add_character = {
-	icon = d_invite_to_court
+	icon = invite_to_court_interaction
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -75,7 +75,7 @@ deviants_add_character = {
 }
 
 deviants_imprison = {
-	icon = d_imprison
+	icon = imprison_interaction
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -98,7 +98,7 @@ deviants_imprison = {
 }
 
 deviants_vassal_inter = {
-	icon = d_vassal
+	icon = icon_vassal
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -122,7 +122,7 @@ deviants_vassal_inter = {
 }
 
 deviants_revoke_character = {
-	icon  = d_revoke_title
+	icon  = revoke_title
 	use_diplomatic_range = no
 	auto_accept = yes
 	ignores_pending_interaction_block = yes
@@ -152,7 +152,7 @@ deviants_revoke_character = {
 }
 
 deviants_befriend_character = {
-	icon = d_friend
+	icon = synergise_friendship_interaction
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -180,7 +180,7 @@ deviants_befriend_character = {
 }
 
 deviants_lover_character = {
-	icon = d_sex
+	icon = lover
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -208,7 +208,7 @@ deviants_lover_character = {
 }
 
 deviants_remove_rival = {
-	icon = d_hostile
+	icon = icon_hostile
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -229,7 +229,7 @@ deviants_remove_rival = {
 }
 
 deviants_create_hook = {
-	icon = d_fabricate_hook
+	icon = fabricate_hook_interaction
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
