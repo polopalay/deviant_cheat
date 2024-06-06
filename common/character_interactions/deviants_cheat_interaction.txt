@@ -83,6 +83,105 @@ deviants_change_government = {
 		}
 	}
 }
+deviants_child = {
+	icon = pregnant
+	desc = deviants_child_interaction.desc
+    	use_diplomatic_range = yes
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		scope:recipient = {
+			is_adult = yes
+			is_female = yes
+			age >= 18
+		}
+	}
+	on_accept = {
+		scope:recipient = {
+			random_list = {
+				50 = {
+					if = {
+						limit = { patrilinear_marriage = yes }
+						create_character = {
+							age = 0
+							mother = scope:recipient
+							father = primary_spouse
+							dynasty_house = primary_spouse.house
+							culture = primary_spouse.culture
+							faith = primary_spouse.faith
+							gender = female
+						}
+					}
+					else = {
+						if = {
+							limit = { exists = primary_spouse }
+							create_character = {
+								age = 0
+								mother = scope:recipient
+								father = primary_spouse
+								dynasty_house = house
+								culture = culture
+								faith = faith
+								gender = female
+							}
+						}
+						else = {
+							create_character = {
+								age = 0
+								mother = scope:recipient
+								dynasty_house = house
+								culture = culture
+								faith = faith
+								gender = female
+							}
+						}
+					}
+				}
+				50 = {
+					if = {
+						limit = { patrilinear_marriage = yes }
+						create_character = {
+							age = 0
+							mother = scope:recipient
+							father = primary_spouse
+							dynasty_house = primary_spouse.house
+							culture = primary_spouse.culture
+							faith = primary_spouse.faith
+							gender = male
+						}
+					}
+					else = {
+						if = {
+							limit = { exists = primary_spouse }
+							create_character = {
+								age = 0
+								mother = scope:recipient
+								father = primary_spouse
+								dynasty_house = house
+								culture = culture
+								faith = faith
+								gender = male
+							}
+						}
+						else = {
+							create_character = {
+								age = 0
+								mother = scope:recipient
+								dynasty_house = house
+								culture = culture
+								faith = faith
+								gender = male
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	auto_accept = yes
+}
+
 
 deviants_switch_character = {
 	icon = d_switch

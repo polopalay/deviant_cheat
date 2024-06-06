@@ -45,6 +45,30 @@ deviants_events.1 = {
 		trigger_event = deviants_events.1
 	}
 	option = {
+		name = deviants_nude
+		trigger = {
+			scope:currency_scope = {
+				NOT = { has_character_modifier = diplomacy_majesty_4090_no_raiment_modifier }
+			}
+		}
+		scope:currency_scope = {
+			add_character_modifier = diplomacy_majesty_4090_no_raiment_modifier
+		}
+		trigger_event = deviants_events.1
+	}
+	option = {
+		name = deviants_stop_nude
+		trigger = {
+			scope:currency_scope = {
+				has_character_modifier = diplomacy_majesty_4090_no_raiment_modifier
+			}
+		}
+		scope:currency_scope = {
+			remove_character_modifier = diplomacy_majesty_4090_no_raiment_modifier
+		}
+		trigger_event = deviants_events.1
+	}
+	option = {
 		name = deviants_add_weight
 		scope:currency_scope = {
 			change_current_weight = 10

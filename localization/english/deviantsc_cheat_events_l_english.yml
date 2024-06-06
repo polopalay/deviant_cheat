@@ -2,6 +2,8 @@
  deviants_events.1.title: "Interactions menu"
  deviants_events.1.desc: "Modify character"
 
+ deviants_nude: "Nude"
+ deviants_stop_nude: "Dressing"
  deviants_remove_status: "Remove bad status"
  deviants_secret: "Add evil secret"
  deviants_nickname: "Give Nickname"
