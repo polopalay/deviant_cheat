@@ -14,10 +14,36 @@ deviants_events.1 = {
 		scope:currency_scope = {
 			remove_character_modifier = deviants_fuckedsilly
 			remove_character_flag = has_reading_glasses
+			remove_character_flag = is_naked
+			remove_character_flag = birth_mother_will_die
+			remove_trait = beauty_bad_1
+			remove_trait = beauty_bad_2
+			remove_trait = beauty_bad_3
+			remove_trait = intellect_bad_1
+			remove_trait = intellect_bad_2
+			remove_trait = intellect_bad_3
+			remove_trait = physique_bad_1
+			remove_trait = physique_bad_2
+			remove_trait = physique_bad_3
+			remove_trait = clubfooted
+			remove_trait = hunchbacked
+			remove_trait = lisping
+			remove_trait = stuttering
+			remove_trait = dwarf
+			remove_trait = giant
+			remove_trait = inbred
+			remove_trait = weak
+			remove_trait = dull
+			remove_trait = impotent
+			remove_trait = spindly
+			remove_trait = scaly
+			remove_trait = albino
+			remove_trait = wheezing
+			remove_trait = bleeder
+			remove_trait = infertile
 		}
 		trigger_event = deviants_events.1
 	}
-
 	option = {
 		name = deviants_add_weight
 		scope:currency_scope = {
@@ -25,7 +51,6 @@ deviants_events.1 = {
 		}
 		trigger_event = deviants_events.1
 	}
-
 	option = {
 		name = deviants_sub_weight
 		scope:currency_scope = {
@@ -37,7 +62,7 @@ deviants_events.1 = {
 		name = deviants_secret
 		trigger = {
 			scope:currency_scope = {
-                       		NOT = {
+                       		NOR = {
                                		any_secret = { secret_type = secret_deviant }
                                		any_secret = { secret_type = secret_witch }
                 		}

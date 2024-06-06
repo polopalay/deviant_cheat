@@ -22,6 +22,69 @@ deviants_change_interactions = {
 	}
 }
 
+deviants_change_government = {
+	icon = grant_vassal_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		scope:recipient = {
+			is_ai = yes
+			is_ruler = yes
+			primary_title.tier >= tier_county
+		}
+	}
+	send_option = {
+		flag = deviants_feudal	
+		localization = deviants_feudal
+	}
+	send_option = {
+		flag = deviants_clan	
+		localization = deviants_clan
+	}
+	send_option = {
+		flag = deviants_tribal	
+		localization = deviants_tribal
+	}
+	send_option = {
+		flag = deviants_theocracy	
+		localization = deviants_theocracy
+	}
+	send_option = {
+		flag = deviants_republic	
+		localization = deviants_republic
+	}
+
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { scope:deviants_feudal = yes }
+				change_government = feudal_government
+			}
+			else_if = {
+				limit = { scope:deviants_clan = yes }
+				change_government = clan_government
+			}
+			else_if = {
+				limit = { scope:deviants_tribal = yes }
+				change_government = tribal_government
+			}
+			else_if = {
+				limit = { scope:deviants_theocracy = yes }
+				change_government = theocracy_government
+			}
+			else_if = {
+				limit = { scope:deviants_republic = yes }
+				change_government = republic_government
+			}
+		}
+	}
+}
+
 deviants_switch_character = {
 	icon = d_switch
 	common_interaction = yes
@@ -36,6 +99,7 @@ deviants_switch_character = {
 		scope:recipient = {
 			is_ai = yes
 			is_ruler = yes
+			primary_title.tier >= tier_county
 		}
 	}
 
