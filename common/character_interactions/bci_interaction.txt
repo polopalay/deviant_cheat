@@ -1,0 +1,774 @@
+bci_change = {
+	icon = d_full_body
+	common_interaction = yes
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+	}
+	
+	on_send = {
+		scope:recipient = {
+			save_scope_as = currency_scope
+		}
+		scope:actor = {
+			save_actor_as = currency_actor
+			trigger_event = bci_events.1
+		}
+	}
+}
+bci_kill = {
+	icon = icon_dead
+	common_interaction = yes
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+	}
+	
+	on_send = {
+		scope:recipient = {
+			death = natural
+		}
+	}
+}
+
+bci_change_government = {
+	icon = grant_vassal_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		scope:recipient = {
+			is_ruler = yes
+			primary_title.tier >= tier_county
+		}
+	}
+	send_option = {
+		flag = bci_feudal	
+		localization = feudal_government
+	}
+	send_option = {
+		flag = bci_clan	
+		localization = clan_government
+	}
+	send_option = {
+		flag = bci_tribal	
+		localization = tribal_government
+	}
+	send_option = {
+		flag = bci_theocracy	
+		localization = theocracy_government
+	}
+	send_option = {
+		flag = bci_republic	
+		localization = republic_government
+	}
+
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { scope:bci_feudal = yes }
+				change_government = feudal_government
+			}
+			else_if = {
+				limit = { scope:bci_clan = yes }
+				change_government = clan_government
+			}
+			else_if = {
+				limit = { scope:bci_tribal = yes }
+				change_government = tribal_government
+			}
+			else_if = {
+				limit = { scope:bci_theocracy = yes }
+				change_government = theocracy_government
+			}
+			else_if = {
+				limit = { scope:bci_republic = yes }
+				change_government = republic_government
+			}
+		}
+	}
+}
+bci_child = {
+	icon = pregnant
+	desc = bci_child_interaction.desc
+    	use_diplomatic_range = no
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		scope:recipient = {
+			is_adult = yes
+			is_female = yes
+			age >= 18
+		}
+	}
+	on_accept = {
+		scope:recipient = {
+			random_list = {
+				50 = {
+					if = {
+						limit = { patrilinear_marriage = yes }
+						create_character = {
+							age = 0
+							mother = scope:recipient
+							father = primary_spouse
+							dynasty_house = primary_spouse.house
+							culture = primary_spouse.culture
+							faith = primary_spouse.faith
+							gender = female
+						}
+					}
+					else = {
+						if = {
+							limit = { exists = primary_spouse }
+							create_character = {
+								age = 0
+								mother = scope:recipient
+								father = primary_spouse
+								dynasty_house = house
+								culture = culture
+								faith = faith
+								gender = female
+							}
+						}
+						else = {
+							create_character = {
+								age = 0
+								mother = scope:recipient
+								dynasty_house = house
+								culture = culture
+								faith = faith
+								gender = female
+							}
+						}
+					}
+				}
+				50 = {
+					if = {
+						limit = { patrilinear_marriage = yes }
+						create_character = {
+							age = 0
+							mother = scope:recipient
+							father = primary_spouse
+							dynasty_house = primary_spouse.house
+							culture = primary_spouse.culture
+							faith = primary_spouse.faith
+							gender = male
+						}
+					}
+					else = {
+						if = {
+							limit = { exists = primary_spouse }
+							create_character = {
+								age = 0
+								mother = scope:recipient
+								father = primary_spouse
+								dynasty_house = house
+								culture = culture
+								faith = faith
+								gender = male
+							}
+						}
+						else = {
+							create_character = {
+								age = 0
+								mother = scope:recipient
+								dynasty_house = house
+								culture = culture
+								faith = faith
+								gender = male
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	auto_accept = yes
+}
+
+
+bci_switch_character = {
+	icon = d_switch
+	common_interaction = yes
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		scope:recipient = {
+			is_ai = yes
+			is_ruler = yes
+			primary_title.tier >= tier_county
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			set_player_character = scope:recipient
+		}
+	}
+}
+
+bci_add_character = {
+	icon = invite_to_court_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:recipient = {
+			is_ruler = no
+			is_landed = no
+			NOT = {
+				is_courtier_of = scope:actor
+			}
+		}
+		scope:actor = {
+			is_ai = no
+			is_landed = yes
+		}
+	}
+	
+	on_accept = {
+		scope:actor = {
+			add_courtier = scope:recipient
+		}
+	}
+}
+
+bci_imprison = {
+	icon = imprison_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:actor = {
+			is_ai = no
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			imprison = {
+				target = scope:recipient
+				type = dungeon
+			}
+		}
+	}
+}
+
+bci_vassal_inter = {
+	icon = icon_vassal
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:recipient = {
+			is_landed = yes
+			highest_held_title_tier < scope:actor.highest_held_title_tier
+			NOT = { government_has_flag = can_not_be_vassal_or_liege }
+			NOT = { is_vassal_of = scope:actor }
+		}
+		scope:actor = {
+			is_ai = no
+		}
+	}
+
+	on_accept = {
+		offer_vassalization_interaction_effect = yes
+	}
+}
+
+bci_revoke_character = {
+	icon  = revoke_title
+	use_diplomatic_range = no
+	auto_accept = yes
+	ignores_pending_interaction_block = yes
+	special_interaction = revoke_title_interaction
+	target_type = title
+	target_filter = recipient_domain_titles
+	
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:recipient = {
+			is_landed = yes
+		}
+		scope:actor = {
+			is_ai = no
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { is_ai = no }
+	}
+	
+	can_be_picked_title = {
+		scope:target = {
+			holder = scope:recipient
+		}
+	}
+}
+
+bci_befriend_character = {
+	icon = synergise_friendship_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:actor = { 
+			is_ai = no
+			NOR = {
+				has_relation_friend = scope:recipient
+				has_relation_best_friend = scope:recipient
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor = {		
+			if = { 
+				limit = { has_relation_friend = scope:recipient }
+				set_relation_best_friend = scope:recipient
+			}
+			else = { set_relation_friend = scope:recipient }
+		}
+	}
+}
+
+bci_lover_character = {
+	icon = lover
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:actor = { 
+			is_ai = no
+			NOR = {
+				has_relation_lover = scope:recipient
+				has_relation_soulmate = scope:recipient
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor = {		
+			if = { 
+				limit = { has_relation_lover = scope:recipient }
+				set_relation_soulmate = scope:recipient
+			}
+			else = { set_relation_lover = scope:recipient }
+		}
+	}
+}
+
+bci_remove_rival = {
+	icon = icon_hostile
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:actor = {
+			is_ai = no
+			has_relation_rival = scope:recipient
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			remove_relation_rival = scope:recipient
+		}
+	}
+}
+
+bci_create_hook = {
+	icon = fabricate_hook_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:actor = {
+			is_ai = no
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			add_hook = {
+				target = scope:recipient
+				type = favor_hook
+			}
+		}
+	}
+}
+
+bci_secret = {
+	icon = secret
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	is_shown = {
+		scope:actor = { is_ai = no }
+		scope:recipient = {
+			NOR = {
+                       		any_secret = { secret_type = secret_deviant }
+                       		any_secret = { secret_type = secret_cannibal }
+                              	any_secret = { secret_type = secret_witch }
+                	}
+		}
+	}
+	send_option = {
+		is_valid = {
+			scope:recipient = {
+				NOT = { any_secret = { secret_type = secret_witch } }
+			}
+		}
+		flag = witch	
+		localization = secret_witch
+	}
+	send_option = {
+		is_valid = {
+			scope:recipient = {
+				NOT = { any_secret = { secret_type = secret_deviant } }
+			}
+		}
+		flag = deviant	
+		localization = secret_deviant
+	}
+	send_option = {
+		is_valid = {
+			scope:recipient = {
+				NOT = { any_secret = { secret_type = secret_cannibal } }
+			}
+		}
+		flag = cannibal	
+		localization = secret_cannibal
+	}
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { scope:deviant = yes }
+				add_secret = { type = secret_deviant }
+			}
+			else_if = {
+				limit = { scope:witch = yes }
+				add_secret = { type = secret_witch }
+			}
+			else_if = {
+				limit = { scope:cannibal = yes }
+				add_secret = { type = secret_cannibal }
+			}
+		}
+	}
+}
+
+bci_nickname = {
+	icon = blackmail_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	is_shown = {
+		scope:actor = { is_ai = no }
+	}
+	send_option = {
+		flag = lewd	
+		localization = nick_the_lewd
+	}
+	send_option = {
+		flag = lecher	
+		localization = nick_the_lecher
+	}
+	send_option = {
+		flag = bewitched	
+		localization = nick_the_bewitched
+	}
+	send_option = {
+		flag = unfaithful
+		localization = nick_the_unfaithful
+	}
+	send_option = {
+		flag = unchaste
+		localization = nick_the_unchaste
+	}
+	send_option = {
+		flag = temptress
+		localization = nick_the_temptress
+	}
+	send_option = {
+		flag = wicked
+		localization = nick_the_wicked
+	}
+	send_option = {
+		flag = accursed
+		localization = nick_the_accursed
+	}
+	send_option = {
+		flag = heathen
+		localization = nick_the_heathen
+	}
+	send_option = {
+		flag = devil
+		localization = nick_the_devil
+	}
+	send_option = {
+		flag = immortal
+		localization = nick_the_immortal
+	}
+	send_option = {
+		flag = witch
+		localization = nick_the_witch
+	}
+	send_option = {
+		flag = black_sheep
+		localization = nick_the_black_sheep
+	}
+	send_option = {
+		flag = iron_and_golden_king
+		localization = nick_the_iron_and_golden_king
+	}
+	send_option = {
+		flag = illuminator
+		localization = nick_the_illuminator
+	}
+	send_option = {
+		flag = dragon
+		localization = nick_the_dragon
+	}
+	send_option = {
+		flag = wizard
+		localization = nick_the_wizard
+	}
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { scope:lewd = yes }
+				give_nickname = nick_the_lewd
+			}
+			else_if = {
+				limit = { scope:lecher = yes }
+				give_nickname = nick_the_lecher
+			}
+			else_if = {
+				limit = { scope:bewitched = yes }
+				give_nickname = nick_the_bewitched
+			}
+			else_if = {
+				limit = { scope:unfaithful = yes }
+				give_nickname = nick_the_unfaithful
+			}
+			else_if = {
+				limit = { scope:unchaste = yes }
+				give_nickname = nick_the_unchaste
+			}
+			else_if = {
+				limit = { scope:temptress = yes }
+				give_nickname = nick_the_temptress
+			}
+			else_if = {
+				limit = { scope:wicked = yes }
+				give_nickname = nick_the_wicked
+			}
+			else_if = {
+				limit = { scope:accursed = yes }
+				give_nickname = nick_the_accursed
+			}
+			else_if = {
+				limit = { scope:heathen = yes }
+				give_nickname = nick_the_heathen
+			}
+			else_if = {
+				limit = { scope:devil = yes }
+				give_nickname = nick_the_devil
+			}
+			else_if = {
+				limit = { scope:witch = yes }
+				give_nickname = nick_the_witch
+			}
+			else_if = {
+				limit = { scope:immortal = yes }
+				give_nickname = nick_the_immortal
+			}
+			else_if = {
+				limit = { scope:black_sheep = yes }
+				give_nickname = nick_the_black_sheep
+			}
+			else_if = {
+				limit = { scope:iron_and_golden_king = yes }
+				give_nickname = nick_the_iron_and_golden_king
+			}
+			else_if = {
+				limit = { scope:illuminator = yes }
+				give_nickname = nick_the_illuminator
+			}
+			else_if = {
+				limit = { scope:dragon = yes }
+				give_nickname = nick_the_dragon
+			}
+			else_if = {
+				limit = { scope:wizard = yes }
+				give_nickname = nick_the_wizard
+			}
+		}
+	}
+}
+
+bci_nude = {
+	icon = undress_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	is_shown = {
+		scope:actor = { is_ai = no }
+		scope:recipient = {
+			NOT = { has_character_modifier = diplomacy_majesty_4090_no_raiment_modifier }
+		}
+	}
+	on_accept = {
+		scope:recipient = {
+			add_character_modifier = diplomacy_majesty_4090_no_raiment_modifier
+		}
+	}
+}
+bci_stop_nude = {
+	icon = dress_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	is_shown = {
+		scope:actor = { is_ai = no }
+		scope:recipient = {
+			has_character_modifier = diplomacy_majesty_4090_no_raiment_modifier
+		}
+	}
+	on_accept = {
+		scope:recipient = {
+			remove_character_modifier = diplomacy_majesty_4090_no_raiment_modifier
+		}
+	}
+}
+bci_remove_status = {
+	icon = d_healing
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	is_shown = {
+		scope:actor = { is_ai = no }
+	}
+	on_accept = {
+		scope:recipient = {
+			remove_character_flag = has_reading_glasses
+			remove_character_flag = is_naked
+			remove_character_flag = birth_mother_will_die
+			remove_trait = beauty_bad_1
+			remove_trait = beauty_bad_2
+			remove_trait = beauty_bad_3
+			remove_trait = intellect_bad_1
+			remove_trait = intellect_bad_2
+			remove_trait = intellect_bad_3
+			remove_trait = physique_bad_1
+			remove_trait = physique_bad_2
+			remove_trait = physique_bad_3
+			remove_trait = clubfooted
+			remove_trait = hunchbacked
+			remove_trait = lisping
+			remove_trait = stuttering
+			remove_trait = dwarf
+			remove_trait = giant
+			remove_trait = inbred
+			remove_trait = weak
+			remove_trait = dull
+			remove_trait = impotent
+			remove_trait = spindly
+			remove_trait = scaly
+			remove_trait = albino
+			remove_trait = wheezing
+			remove_trait = bleeder
+			remove_trait = infertile
+
+			remove_trait = drunkard
+			remove_trait = hashishiyah
+			remove_trait = rakish
+			remove_trait = reclusive
+			remove_trait = irritable
+			remove_trait = flagellant
+			remove_trait = profligate
+			remove_trait = improvident
+			remove_trait = contrite
+			remove_trait = comfort_eater
+			remove_trait = inappetetic
+
+			has_trait = depressed_1
+			has_trait = depressed_genetic
+			has_trait = lunatic_1
+			has_trait = lunatic_genetic
+			has_trait = possessed_1
+			has_trait = one_eyed
+			has_trait = scarred
+			has_trait = maimed
+			has_trait = one_legged
+			has_trait = disfigured
+			has_trait = eunuch
+			has_trait = blind
+			has_trait = sickly
+			has_trait = infirm
+			has_trait = incapable 
+			has_trait = leper
+			has_trait = ill 
+			has_trait = pneumonic 
+			has_trait = gout_ridden 
+			has_trait = typhus 
+			has_trait = consumption 
+			has_trait = cancer 
+			has_trait = great_pox 
+			has_trait = smallpox 
+			has_trait = bubonic_plague 
+			has_trait = lovers_pox 
+			has_trait = great_pox 
+			has_trait = possessed_genetic
+			has_trait = bubonic_plague
+			has_trait = measles
+			has_trait = dysentery
+			has_trait = ergotism
+			has_trait = wounded_1
+			has_trait = wounded_2
+			has_trait = wounded_3
+			has_trait = deviant
+			has_trait = cannibal
+			has_trait = sodomite
+			has_trait = incestuous
+			has_trait = adulterer
+			has_trait = fornicator
+			has_trait = witch
+		}
+	}
+}

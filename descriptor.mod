@@ -1,7 +1,7 @@
 version="0.1"
 tags={
-	"Decisions"
+	"Interaction"
 	"Events"
 }
-name="Deviants Cheat"
+name="Basic cheat interaction"
 supported_version="1.12.*"
