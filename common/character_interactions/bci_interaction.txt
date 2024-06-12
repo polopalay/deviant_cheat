@@ -1,5 +1,5 @@
 bci_change = {
-	icon = d_full_body
+	icon = full_body_hair_interaction
 	common_interaction = yes
 	auto_accept = yes
 	use_diplomatic_range = no
@@ -21,9 +21,35 @@ bci_change = {
 		}
 	}
 }
+
+bci_switch_character = {
+	icon = propose_best_friendship_interaction
+	common_interaction = yes
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		scope:recipient = {
+			is_ai = yes
+			is_ruler = yes
+			primary_title.tier >= tier_county
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			set_player_character = scope:recipient
+		}
+	}
+}
+
 bci_kill = {
 	icon = icon_dead
-	common_interaction = yes
+	common_interaction = no
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
@@ -199,32 +225,6 @@ bci_child = {
 		}
 	}
 	auto_accept = yes
-}
-
-
-bci_switch_character = {
-	icon = d_switch
-	common_interaction = yes
-	auto_accept = yes
-	use_diplomatic_range = no
-	ignores_pending_interaction_block = yes
-
-	is_shown = {
-		scope:actor = {
-			is_ai = no
-		}
-		scope:recipient = {
-			is_ai = yes
-			is_ruler = yes
-			primary_title.tier >= tier_county
-		}
-	}
-
-	on_accept = {
-		scope:actor = {
-			set_player_character = scope:recipient
-		}
-	}
 }
 
 bci_add_character = {
@@ -440,7 +440,7 @@ bci_secret = {
 	is_shown = {
 		scope:actor = { is_ai = no }
 		scope:recipient = {
-			NOR = {
+			NOT = {
                        		any_secret = { secret_type = secret_deviant }
                        		any_secret = { secret_type = secret_cannibal }
                               	any_secret = { secret_type = secret_witch }
@@ -677,7 +677,7 @@ bci_stop_nude = {
 	}
 }
 bci_remove_status = {
-	icon = d_healing
+	icon = healing
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
