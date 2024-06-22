@@ -439,13 +439,6 @@ bci_secret = {
 	ignores_pending_interaction_block = yes
 	is_shown = {
 		scope:actor = { is_ai = no }
-		scope:recipient = {
-			NOT = {
-                       		any_secret = { secret_type = secret_deviant }
-                       		any_secret = { secret_type = secret_cannibal }
-                              	any_secret = { secret_type = secret_witch }
-                	}
-		}
 	}
 	send_option = {
 		is_valid = {
