@@ -147,7 +147,7 @@ bci_child = {
 			random_list = {
 				50 = {
 					if = {
-						limit = { patrilinear_marriage = yes }
+						limit = { scope:recipient = { patrilinear_marriage = yes } }
 						create_character = {
 							age = 0
 							mother = scope:recipient
