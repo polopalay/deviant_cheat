@@ -102,6 +102,7 @@ bci_change_government = {
 		flag = bci_republic	
 		localization = republic_government
 	}
+	send_options_exclusive = yes
 
 	on_accept = {
 		scope:recipient = {
@@ -128,6 +129,7 @@ bci_change_government = {
 		}
 	}
 }
+
 bci_child = {
 	icon = pregnant
 	desc = bci_child_interaction.desc
@@ -467,6 +469,8 @@ bci_secret = {
 		flag = cannibal	
 		localization = secret_cannibal
 	}
+	send_options_exclusive = yes
+
 	on_accept = {
 		scope:recipient = {
 			if = {
@@ -561,6 +565,7 @@ bci_nickname = {
 		flag = wizard
 		localization = nick_the_wizard
 	}
+	send_options_exclusive = yes
 	on_accept = {
 		scope:recipient = {
 			if = {
@@ -670,7 +675,7 @@ bci_stop_nude = {
 	}
 }
 bci_remove_status = {
-	icon = healing
+	icon = convert_to_witchcraft_interaction
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
