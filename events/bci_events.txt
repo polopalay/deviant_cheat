@@ -40,7 +40,7 @@ bci_events.1 = {
 	option = {
 		name = bci_sub_stress
 		scope:currency_scope = {
-			add_stress = -100
+			add_stress = -1000
 		}
 		trigger_event = bci_events.1
 	}
@@ -69,6 +69,13 @@ bci_events.1 = {
 		name = bci_sub_weight
 		scope:currency_scope = {
 			change_current_weight = -10
+		}
+		trigger_event = bci_events.1
+	}
+	option = {
+		name = bci_change_religion
+		scope:currency_scope = {
+			set_character_faith = scope:actor_scope.faith
 		}
 		trigger_event = bci_events.1
 	}

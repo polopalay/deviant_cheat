@@ -12,6 +12,9 @@ bci_change = {
 	}
 	
 	on_send = {
+		scope:actor = {
+			save_scope_as = actor_scope
+		}
 		scope:recipient = {
 			save_scope_as = currency_scope
 		}
@@ -674,6 +677,7 @@ bci_stop_nude = {
 		}
 	}
 }
+
 bci_remove_status = {
 	icon = convert_to_witchcraft_interaction
 	auto_accept = yes
@@ -725,48 +729,51 @@ bci_remove_status = {
 			remove_trait = comfort_eater
 			remove_trait = inappetetic
 
-			has_trait = depressed_1
-			has_trait = depressed_genetic
-			has_trait = lunatic_1
-			has_trait = lunatic_genetic
-			has_trait = possessed_1
-			has_trait = one_eyed
-			has_trait = scarred
-			has_trait = maimed
-			has_trait = one_legged
-			has_trait = disfigured
-			has_trait = eunuch
-			has_trait = blind
-			has_trait = sickly
-			has_trait = infirm
-			has_trait = incapable 
-			has_trait = leper
-			has_trait = ill 
-			has_trait = pneumonic 
-			has_trait = gout_ridden 
-			has_trait = typhus 
-			has_trait = consumption 
-			has_trait = cancer 
-			has_trait = great_pox 
-			has_trait = smallpox 
-			has_trait = bubonic_plague 
-			has_trait = lovers_pox 
-			has_trait = great_pox 
-			has_trait = possessed_genetic
-			has_trait = bubonic_plague
-			has_trait = measles
-			has_trait = dysentery
-			has_trait = ergotism
-			has_trait = wounded_1
-			has_trait = wounded_2
-			has_trait = wounded_3
-			has_trait = deviant
-			has_trait = cannibal
-			has_trait = sodomite
-			has_trait = incestuous
-			has_trait = adulterer
-			has_trait = fornicator
-			has_trait = witch
+			remove_trait = depressed_1
+			remove_trait = depressed_genetic
+			remove_trait = lunatic_1
+			remove_trait = lunatic_genetic
+			remove_trait = possessed_1
+			remove_trait = possessed_genetic
+			remove_trait = one_eyed
+			remove_trait = scarred
+			remove_trait = maimed
+			remove_trait = one_legged
+			remove_trait = disfigured
+			remove_trait = eunuch
+			remove_trait = blind
+			remove_trait = sickly
+			remove_trait = infirm
+			remove_trait = incapable 
+			remove_trait = leper
+			remove_trait = wounded_1
+			remove_trait = wounded_2
+			remove_trait = wounded_3
+
+			recover_from_disease_effect = { DISEASE = ill }
+			recover_from_disease_effect = { DISEASE = pneumonic }
+			recover_from_disease_effect = { DISEASE = gout_ridden }
+			recover_from_disease_effect = { DISEASE = typhus }
+			recover_from_disease_effect = { DISEASE = consumption }
+			recover_from_disease_effect = { DISEASE = measles }
+			recover_from_disease_effect = { DISEASE = cancer }
+			recover_from_disease_effect = { DISEASE = great_pox }
+			recover_from_disease_effect = { DISEASE = smallpox }
+			recover_from_disease_effect = { DISEASE = bubonic_plague }
+			recover_from_disease_effect = { DISEASE = lovers_pox }
+			recover_from_disease_effect = { DISEASE = bubonic_plague }
+			recover_from_disease_effect = { DISEASE = dysentery }
+			recover_from_disease_effect = { DISEASE = ergotism }
+			recover_from_disease_effect = { DISEASE = measles }
+
+			remove_trait = deviant
+			remove_trait = cannibal
+			remove_trait = sodomite
+			remove_trait = incestuous
+			remove_trait = adulterer
+			remove_trait = fornicator
+			remove_trait = murderer
+			remove_trait = witch
 		}
 	}
 }
