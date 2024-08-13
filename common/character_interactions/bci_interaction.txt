@@ -777,3 +777,794 @@ bci_remove_status = {
 		}
 	}
 }
+
+bci_personality_trait = {
+	icon = forgiving
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	common_interaction = yes
+
+	is_shown = {
+		scope:actor = { is_ai = no }
+	}
+	
+	send_option = {
+		flag = lustful	
+		localization = trait_lustful
+	}
+	send_option = {
+		flag = chaste	
+		localization = trait_chaste
+	}
+	send_option = {
+		flag = gluttonous	
+		localization = trait_gluttonous
+	}
+	send_option = {
+		flag = temperate	
+		localization = trait_temperate
+	}
+	send_option = {
+		flag = greedy	
+		localization = trait_greedy
+	}
+	send_option = {
+		flag = generous	
+		localization = trait_generous
+	}
+	send_option = {
+		flag = lazy	
+		localization = trait_lazy
+	}
+	send_option = {
+		flag = diligent	
+		localization = trait_diligent
+	}
+	send_option = {
+		flag = wrathful	
+		localization = trait_wrathful
+	}
+	send_option = {
+		flag = calm	
+		localization = trait_calm
+	}
+	send_option = {
+		flag = patient	
+		localization = trait_patient
+	}
+	send_option = {
+		flag = impatient	
+		localization = trait_impatient
+	}
+	send_option = {
+		flag = arrogant	
+		localization = trait_arrogant
+	}
+	send_option = {
+		flag = humble	
+		localization = trait_humble
+	}
+	send_option = {
+		flag = deceitful	
+		localization = trait_deceitful
+	}
+	send_option = {
+		flag = honest	
+		localization = trait_honest
+	}
+	send_option = {
+		flag = craven	
+		localization = trait_craven
+	}
+	send_option = {
+		flag = brave	
+		localization = trait_brave
+	}
+	send_option = {
+		flag = brave	
+		localization = trait_brave
+	}
+	send_option = {
+		flag = shy	
+		localization = trait_shy
+	}
+	send_option = {
+		flag = gregarious	
+		localization = trait_gregarious
+	}
+	send_option = {
+		flag = ambitious	
+		localization = trait_ambitious
+	}
+	send_option = {
+		flag = content	
+		localization = trait_content
+	}
+	send_option = {
+		flag = arbitrary	
+		localization = trait_arbitrary
+	}
+	send_option = {
+		flag = just	
+		localization = trait_just
+	}
+	send_option = {
+		flag = cynical	
+		localization = trait_cynical
+	}
+	send_option = {
+		flag = zealous	
+		localization = trait_zealous
+	}
+	send_option = {
+		flag = paranoid	
+		localization = trait_paranoid
+	}
+	send_option = {
+		flag = trusting	
+		localization = trait_trusting
+	}
+	send_option = {
+		flag = compassionate	
+		localization = trait_compassionate
+	}
+	send_option = {
+		flag = compassionate	
+		localization = trait_callous
+	}
+	send_option = {
+		flag = compassionate	
+		localization = trait_callous
+	}
+	send_option = {
+		flag = sadistic	
+		localization = trait_sadistic
+	}
+	send_option = {
+		flag = stubborn	
+		localization = trait_stubborn
+	}
+	send_option = {
+		flag = fickle	
+		localization = trait_fickle
+	}
+	send_option = {
+		flag = eccentric	
+		localization = trait_eccentric
+	}
+	send_option = {
+		flag = vengeful	
+		localization = trait_vengeful
+	}
+	send_option = {
+		flag = forgiving	
+		localization = trait_forgiving
+	}
+
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { scope:lustful = yes }
+				if = {
+					limit = { has_trait = lustful }
+					remove_trait = lustful
+				}
+				else = { add_trait = lustful }
+			}
+			else_if = {
+				limit = { scope:chaste = yes }
+				if = {
+					limit = { has_trait = chaste }
+					remove_trait = chaste
+				}
+				else = { add_trait = chaste }
+			}
+			else_if = {
+				limit = { scope:gluttonous = yes }
+				if = {
+					limit = { has_trait = gluttonous }
+					remove_trait = gluttonous
+				}
+				else = { add_trait = gluttonous }
+			}
+			else_if = {
+				limit = { scope:temperate = yes }
+				if = {
+					limit = { has_trait = temperate }
+					remove_trait = temperate
+				}
+				else = { add_trait = temperate }
+			}
+			else_if = {
+				limit = { scope:greedy = yes }
+				if = {
+					limit = { has_trait = greedy }
+					remove_trait = greedy
+				}
+				else = { add_trait = greedy }
+			}
+			else_if = {
+				limit = { scope:generous = yes }
+				if = {
+					limit = { has_trait = generous }
+					remove_trait = generous
+				}
+				else = { add_trait = generous }
+			}
+			else_if = {
+				limit = { scope:lazy = yes }
+				if = {
+					limit = { has_trait = lazy }
+					remove_trait = lazy
+				}
+				else = { add_trait = lazy }
+			}
+			else_if = {
+				limit = { scope:diligent = yes }
+				if = {
+					limit = { has_trait = diligent }
+					remove_trait = diligent
+				}
+				else = { add_trait = diligent }
+			}
+			else_if = {
+				limit = { scope:wrathful = yes }
+				if = {
+					limit = { has_trait = wrathful }
+					remove_trait = wrathful
+				}
+				else = { add_trait = wrathful }
+			}
+			else_if = {
+				limit = { scope:calm = yes }
+				if = {
+					limit = { has_trait = calm }
+					remove_trait = calm
+				}
+				else = { add_trait = calm }
+			}
+			else_if = {
+				limit = { scope:patient = yes }
+				if = {
+					limit = { has_trait = patient }
+					remove_trait = patient
+				}
+				else = { add_trait = patient }
+			}
+			else_if = {
+				limit = { scope:impatient = yes }
+				if = {
+					limit = { has_trait = impatient }
+					remove_trait = impatient
+				}
+				else = { add_trait = impatient }
+			}
+			else_if = {
+				limit = { scope:arrogant = yes }
+				if = {
+					limit = { has_trait = arrogant }
+					remove_trait = arrogant
+				}
+				else = { add_trait = arrogant }
+			}
+			else_if = {
+				limit = { scope:humble = yes }
+				if = {
+					limit = { has_trait = humble }
+					remove_trait = humble
+				}
+				else = { add_trait = humble }
+			}
+			else_if = {
+				limit = { scope:deceitful = yes }
+				if = {
+					limit = { has_trait = deceitful }
+					remove_trait = deceitful
+				}
+				else = { add_trait = deceitful }
+			}
+			else_if = {
+				limit = { scope:honest = yes }
+				if = {
+					limit = { has_trait = honest }
+					remove_trait = honest
+				}
+				else = { add_trait = honest }
+			}
+			else_if = {
+				limit = { scope:craven = yes }
+				if = {
+					limit = { has_trait = craven }
+					remove_trait = craven
+				}
+				else = { add_trait = craven }
+			}
+			else_if = {
+				limit = { scope:brave = yes }
+				if = {
+					limit = { has_trait = brave }
+					remove_trait = brave
+				}
+				else = { add_trait = brave }
+			}
+			else_if = {
+				limit = { scope:brave = yes }
+				if = {
+					limit = { has_trait = brave }
+					remove_trait = brave
+				}
+				else = { add_trait = brave }
+			}
+			else_if = {
+				limit = { scope:shy = yes }
+				if = {
+					limit = { has_trait = shy }
+					remove_trait = shy
+				}
+				else = { add_trait = shy }
+			}
+			else_if = {
+				limit = { scope:gregarious = yes }
+				if = {
+					limit = { has_trait = gregarious }
+					remove_trait = gregarious
+				}
+				else = { add_trait = gregarious }
+			}
+			else_if = {
+				limit = { scope:ambitious = yes }
+				if = {
+					limit = { has_trait = ambitious }
+					remove_trait = ambitious
+				}
+				else = { add_trait = ambitious }
+			}
+			else_if = {
+				limit = { scope:content = yes }
+				if = {
+					limit = { has_trait = content }
+					remove_trait = content
+				}
+				else = { add_trait = content }
+			}
+			else_if = {
+				limit = { scope:arbitrary = yes }
+				if = {
+					limit = { has_trait = arbitrary }
+					remove_trait = arbitrary
+				}
+				else = { add_trait = arbitrary }
+			}
+			else_if = {
+				limit = { scope:just = yes }
+				if = {
+					limit = { has_trait = just }
+					remove_trait = just
+				}
+				else = { add_trait = just }
+			}
+			else_if = {
+				limit = { scope:cynical = yes }
+				if = {
+					limit = { has_trait = cynical }
+					remove_trait = cynical
+				}
+				else = { add_trait = cynical }
+			}
+			else_if = {
+				limit = { scope:zealous = yes }
+				if = {
+					limit = { has_trait = zealous }
+					remove_trait = zealous
+				}
+				else = { add_trait = zealous }
+			}
+			else_if = {
+				limit = { scope:paranoid = yes }
+				if = {
+					limit = { has_trait = paranoid }
+					remove_trait = paranoid
+				}
+				else = { add_trait = paranoid }
+			}
+			else_if = {
+				limit = { scope:trusting = yes }
+				if = {
+					limit = { has_trait = trusting }
+					remove_trait = trusting
+				}
+				else = { add_trait = trusting }
+			}
+			else_if = {
+				limit = { scope:compassionate = yes }
+				if = {
+					limit = { has_trait = compassionate }
+					remove_trait = compassionate
+				}
+				else = { add_trait = compassionate }
+			}
+			else_if = {
+				limit = { scope:callous = yes }
+				if = {
+					limit = { has_trait = callous }
+					remove_trait = callous
+				}
+				else = { add_trait = callous }
+			}
+			else_if = {
+				limit = { scope:sadistic = yes }
+				if = {
+					limit = { has_trait = sadistic }
+					remove_trait = sadistic
+				}
+				else = { add_trait = sadistic }
+			}
+			else_if = {
+				limit = { scope:stubborn = yes }
+				if = {
+					limit = { has_trait = stubborn }
+					remove_trait = stubborn
+				}
+				else = { add_trait = stubborn }
+			}
+			else_if = {
+				limit = { scope:fickle = yes }
+				if = {
+					limit = { has_trait = fickle }
+					remove_trait = fickle
+				}
+				else = { add_trait = fickle }
+			}
+			else_if = {
+				limit = { scope:eccentric = yes }
+				if = {
+					limit = { has_trait = eccentric }
+					remove_trait = eccentric
+				}
+				else = { add_trait = eccentric }
+			}
+			else_if = {
+				limit = { scope:vengeful = yes }
+				if = {
+					limit = { has_trait = vengeful }
+					remove_trait = vengeful
+				}
+				else = { add_trait = vengeful }
+			}
+			else_if = {
+				limit = { scope:forgiving = yes }
+				if = {
+					limit = { has_trait = forgiving }
+					remove_trait = forgiving
+				}
+				else = { add_trait = forgiving }
+			}
+		}
+	}
+}
+
+bci_lifestyle_trait = {
+	icon = artifact
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	common_interaction = yes
+
+	is_shown = {
+		scope:actor = { is_ai = no }
+	}
+
+	send_option = {
+		flag = lifestyle_reveler	
+		localization = trait_lifestyle_reveler
+	}
+	send_option = {
+		flag = lifestyle_blademaster	
+		localization = trait_lifestyle_blademaster
+	}
+	send_option = {
+		flag = lifestyle_hunter	
+		localization = trait_lifestyle_hunter
+	}
+	send_option = {
+		flag = lifestyle_mystic	
+		localization = trait_lifestyle_mystic
+	}
+	send_option = {
+		flag = lifestyle_physician	
+		localization = trait_lifestyle_physician
+	}
+	send_option = {
+		flag = lifestyle_herbalist	
+		localization = trait_lifestyle_herbalist
+	}
+	send_option = {
+		flag = lifestyle_gardener	
+		localization = trait_lifestyle_gardener
+	}
+
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { scope:lifestyle_reveler = yes }
+				if = {
+					limit = { NOT = { has_trait = lifestyle_reveler } }
+					add_trait = lifestyle_reveler
+				}
+				else_if = {
+					limit = { has_trait_xp = { trait = lifestyle_reveler value < 100 } }
+					add_trait_xp = { trait = lifestyle_reveler value = 100 }
+				}
+				else = { remove_trait = lifestyle_reveler }
+			}
+			else_if = {
+				limit = { scope:lifestyle_blademaster = yes }
+				if = {
+					limit = { NOT = { has_trait = lifestyle_blademaster } }
+					add_trait = lifestyle_blademaster
+				}
+				else_if = {
+					limit = { has_trait_xp = { trait = lifestyle_blademaster value < 100 } }
+					add_trait_xp = { trait = lifestyle_blademaster value = 100 }
+				}
+				else = { remove_trait = lifestyle_blademaster }
+			}
+			else_if = {
+				limit = { scope:lifestyle_hunter = yes }
+				if = {
+					limit = { NOT = { has_trait = lifestyle_hunter } }
+					add_trait = lifestyle_hunter
+				}
+				else_if = {
+					limit = { 
+						OR = {
+							has_trait_xp = { trait = lifestyle_hunter track = hunter value < 100 } 
+							has_trait_xp = { trait = lifestyle_hunter track = falconer value < 100 } 
+						}
+					}
+					add_trait_xp = { trait = lifestyle_hunter track = hunter value = 100 }
+					add_trait_xp = { trait = lifestyle_hunter track = falconer value = 100 }
+				}
+				else = { remove_trait = lifestyle_hunter }
+			}
+			else_if = {
+				limit = { scope:lifestyle_mystic = yes }
+				if = {
+					limit = { NOT = { has_trait = lifestyle_mystic } }
+					add_trait = lifestyle_mystic
+				}
+				else_if = {
+					limit = { has_trait_xp = { trait = lifestyle_mystic value < 100 } }
+					add_trait_xp = { trait = lifestyle_mystic value = 100 }
+				}
+				else = { remove_trait = lifestyle_mystic }
+			}
+			else_if = {
+				limit = { scope:lifestyle_physician = yes }
+				if = {
+					limit = { NOT = { has_trait = lifestyle_physician } }
+					add_trait = lifestyle_physician
+				}
+				else_if = {
+					limit = { has_trait_xp = { trait = lifestyle_physician value < 100 } }
+					add_trait_xp = { trait = lifestyle_physician value = 100 }
+				}
+				else = { remove_trait = lifestyle_physician }
+			}
+			else_if = {
+				limit = { scope:lifestyle_herbalist = yes }
+				if = {
+					limit = { NOT = { has_trait = lifestyle_herbalist } }
+					add_trait = lifestyle_herbalist
+				}
+				else = { remove_trait = lifestyle_herbalist }
+			}
+			else_if = {
+				limit = { scope:lifestyle_gardener = yes }
+				if = {
+					limit = { NOT = { has_trait = lifestyle_gardener } }
+					add_trait = lifestyle_gardener
+				}
+				else = { remove_trait = lifestyle_gardener }
+			}
+		}
+	}
+}
+
+bci_fame_trait = {
+	icon = chronicle_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	common_interaction = yes
+
+	is_shown = {
+		scope:actor = { is_ai = no }
+	}
+
+	send_option = {
+		flag = journaller	
+		localization = trait_journaller
+	}
+	send_option = {
+		flag = confider	
+		localization = trait_confider
+	}
+	send_option = {
+		flag = athletic	
+		localization = athletic
+	}
+	send_option = {
+		flag = order_member	
+		localization = trait_order_member
+	}
+	send_option = {
+		flag = berserker	
+		localization = trait_berserker
+	}
+	send_option = {
+		flag = shieldmaiden	
+		localization = trait_shieldmaiden_female
+	}
+	send_option = {
+		flag = varangian	
+		localization = trait_varangian
+	}
+	send_option = {
+		flag = viking	
+		localization = trait_viking_has_longships
+	}
+	send_option = {
+		flag = adventurer	
+		localization = trait_adventurer
+	}
+	send_option = {
+		flag = heresiarch	
+		localization = trait_heresiarch
+	}
+	send_option = {
+		flag = peasant_leader	
+		localization = trait_peasant_leader
+	}
+	send_option = {
+		flag = poet	
+		localization = trait_poet
+	}
+	send_option = {
+		flag = deviant	
+		localization = trait_deviant
+	}
+	send_option = {
+		flag = cannibal	
+		localization = trait_cannibal
+	}
+	send_option = {
+		flag = witch	
+		localization = trait_witch
+	}
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { scope:journaller = yes }
+				if = {
+					limit = { NOT = { has_trait = journaller } }
+					add_trait = journaller
+				}
+				else = { remove_trait = journaller }
+			}
+			else_if = {
+				limit = { scope:confider = yes }
+				if = {
+					limit = { NOT = { has_trait = confider } }
+					add_trait = confider
+				}
+				else = { remove_trait = confider }
+			}
+			else_if = {
+				limit = { scope:athletic = yes }
+				if = {
+					limit = { NOT = { has_trait = athletic } }
+					add_trait = athletic
+				}
+				else = { remove_trait = athletic }
+			}
+			else_if = {
+				limit = { scope:order_member = yes }
+				if = {
+					limit = { NOT = { has_trait = order_member } }
+					add_trait = order_member
+				}
+				else = { remove_trait = order_member }
+			}
+			else_if = {
+				limit = { scope:berserker = yes }
+				if = {
+					limit = { NOT = { has_trait = berserker } }
+					add_trait = berserker
+				}
+				else = { remove_trait = berserker }
+			}
+			else_if = {
+				limit = { scope:shieldmaiden = yes }
+				if = {
+					limit = { NOT = { has_trait = shieldmaiden } }
+					add_trait = shieldmaiden
+				}
+				else = { remove_trait = shieldmaiden }
+			}
+			else_if = {
+				limit = { scope:varangian = yes }
+				if = {
+					limit = { NOT = { has_trait = varangian } }
+					add_trait = varangian
+				}
+				else = { remove_trait = varangian }
+			}
+			else_if = {
+				limit = { scope:viking = yes }
+				if = {
+					limit = { NOT = { has_trait = viking } }
+					add_trait = viking
+				}
+				else = { remove_trait = viking }
+			}
+			else_if = {
+				limit = { scope:adventurer = yes }
+				if = {
+					limit = { NOT = { has_trait = adventurer } }
+					add_trait = adventurer
+				}
+				else = { remove_trait = adventurer }
+			}
+			else_if = {
+				limit = { scope:heresiarch = yes }
+				if = {
+					limit = { NOT = { has_trait = heresiarch } }
+					add_trait = heresiarch
+				}
+				else = { remove_trait = heresiarch }
+			}
+			else_if = {
+				limit = { scope:peasant_leader = yes }
+				if = {
+					limit = { NOT = { has_trait = peasant_leader } }
+					add_trait = peasant_leader
+				}
+				else = { remove_trait = peasant_leader }
+			}
+			else_if = {
+				limit = { scope:poet = yes }
+				if = {
+					limit = { NOT = { has_trait = poet } }
+					add_trait = poet
+				}
+				else = { remove_trait = poet }
+			}
+			else_if = {
+				limit = { scope:deviant = yes }
+				if = {
+					limit = { NOT = { has_trait = deviant } }
+					add_trait = deviant
+				}
+				else = { remove_trait = deviant }
+			}
+			else_if = {
+				limit = { scope:cannibal = yes }
+				if = {
+					limit = { NOT = { has_trait = cannibal } }
+					add_trait = cannibal
+				}
+				else = { remove_trait = cannibal }
+			}
+			else_if = {
+				limit = { scope:witch = yes }
+				if = {
+					limit = { NOT = { has_trait = witch } }
+					add_trait = witch
+				}
+				else = { remove_trait = witch }
+			}
+		}
+	}
+}

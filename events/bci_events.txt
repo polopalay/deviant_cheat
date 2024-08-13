@@ -26,7 +26,7 @@ bci_events.1 = {
 	option = {
 		name = bci_add_dynasty_prestige
 		scope:currency_scope = {
-			add_dynasty_prestige = 1000
+			dynasty = { add_dynasty_prestige = 1000 }
 		}
 		trigger_event = bci_events.1
 	}
@@ -73,6 +73,9 @@ bci_events.1 = {
 		trigger_event = bci_events.1
 	}
 	option = {
+		trigger = {
+			NOT = { scope:currency_scope.faith = scope:actor_scope.faith }
+		}
 		name = bci_change_religion
 		scope:currency_scope = {
 			set_character_faith = scope:actor_scope.faith

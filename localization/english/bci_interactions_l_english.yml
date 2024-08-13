@@ -1,7 +1,7 @@
 ﻿l_english:
  bci_change: "Edit Character"
- bci_kill: "Kill"
  bci_switch_character: "Change Character"
+ bci_kill: "Kill"
  bci_add_character: "Add to Court"
  bci_revoke_character: "Take Title"
  bci_imprison: "Imprison"
@@ -21,3 +21,6 @@
  bci_nude: "Nude"
  bci_stop_nude: "Dressing"
  bci_remove_status: "Remove bad status"
+ bci_personality_trait: "Edit personality trait"
+ bci_lifestyle_trait: "Edit lifestyle trait"
+ bci_fame_trait: "Edit fame trait"
