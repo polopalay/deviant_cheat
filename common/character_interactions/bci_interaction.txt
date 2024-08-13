@@ -135,7 +135,6 @@ bci_change_government = {
 
 bci_child = {
 	icon = pregnant
-	desc = bci_child_interaction.desc
     	use_diplomatic_range = no
 	is_shown = {
 		scope:actor = {
@@ -955,10 +954,6 @@ bci_personality_trait = {
 		localization = trait_brave
 	}
 	send_option = {
-		flag = brave	
-		localization = trait_brave
-	}
-	send_option = {
 		flag = shy	
 		localization = trait_shy
 	}
@@ -1003,11 +998,7 @@ bci_personality_trait = {
 		localization = trait_compassionate
 	}
 	send_option = {
-		flag = compassionate	
-		localization = trait_callous
-	}
-	send_option = {
-		flag = compassionate	
+		flag = callous	
 		localization = trait_callous
 	}
 	send_option = {
@@ -1172,14 +1163,6 @@ bci_personality_trait = {
 					remove_trait = craven
 				}
 				else = { add_trait = craven }
-			}
-			else_if = {
-				limit = { scope:brave = yes }
-				if = {
-					limit = { has_trait = brave }
-					remove_trait = brave
-				}
-				else = { add_trait = brave }
 			}
 			else_if = {
 				limit = { scope:brave = yes }
@@ -1486,7 +1469,7 @@ bci_fame_trait = {
 	}
 	send_option = {
 		flag = athletic	
-		localization = athletic
+		localization = trait_athletic
 	}
 	send_option = {
 		flag = order_member	
@@ -1665,7 +1648,6 @@ bci_fame_trait = {
 bci_create_lesser_succubus = {
 	icon = lesser_devil
 	desc = deviants_create_lesser_succubus_interaction.desc
-    	category = interaction_category_vassal
     	use_diplomatic_range = no
 	is_shown = {
 		scope:recipient = {
@@ -1697,7 +1679,6 @@ bci_create_lesser_succubus = {
 bci_create_succubus = {
 	icon = devil
 	desc = deviants_create_succubus_interaction.desc
-    	category = interaction_category_vassal
     	use_diplomatic_range = no
 	is_shown = {
 		scope:recipient = {

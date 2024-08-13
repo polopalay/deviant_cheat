@@ -1,4 +1,4 @@
-namespace bci_events
+namespace = bci_events
 
 bci_events.1 = {
 	type = character_event
