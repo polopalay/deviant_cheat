@@ -24,3 +24,5 @@
  bci_personality_trait: "Edit personality trait"
  bci_lifestyle_trait: "Edit lifestyle trait"
  bci_fame_trait: "Edit fame trait"
+ bci_create_lesser_succubus: "Create lesser succubus"
+ bci_create_succubus: "Create succubus"

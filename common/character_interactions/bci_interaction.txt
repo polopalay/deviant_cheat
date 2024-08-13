@@ -1655,3 +1655,73 @@ bci_fame_trait = {
 		}
 	}
 }
+
+bci_create_lesser_succubus = {
+	icon = lesser_devil
+	desc = deviants_create_lesser_succubus_interaction.desc
+    	category = interaction_category_vassal
+    	use_diplomatic_range = no
+	is_shown = {
+		scope:recipient = {
+			is_female = yes
+			age >= 18
+		}
+		scope:actor = { has_trait = deviants_succubus }
+	}
+	on_accept = {
+		scope:recipient = {
+			remove_trait = deviants_succubus
+			remove_trait = deviants_lesser_succubus
+			remove_trait = deviants_virgin
+
+			add_secret = { type = secret_deviant }
+			add_secret = { type = secret_witch }
+			if = {
+				limit = { have_devil_nicknames_trigger = no }
+				give_prostitution_nickname = yes
+			}
+			mind_break_personality = yes
+			add_trait = deviants_lesser_succubus
+			add_character_modifier = deviants_prostitute
+		}
+	}
+	auto_accept = yes
+}
+
+bci_create_succubus = {
+	icon = devil
+	desc = deviants_create_succubus_interaction.desc
+    	category = interaction_category_vassal
+    	use_diplomatic_range = no
+	is_shown = {
+		scope:recipient = {
+			is_female = yes
+			age >= 18
+		}
+		scope:actor = { has_trait = deviants_succubus }
+	}
+	is_valid = {
+		scope:actor = {
+			is_valid_construction_alchemy3_trigger = yes
+		}
+	}
+	on_accept = {
+		scope:recipient = {
+			remove_trait = deviants_succubus
+			remove_trait = deviants_lesser_succubus
+			remove_trait = deviants_virgin
+			add_secret = { type = secret_deviant }
+			add_secret = { type = secret_witch }
+			mind_break_personality = yes
+			if = {
+				limit = { have_devil_nicknames_trigger = no }
+				give_prostitution_nickname = yes
+			}
+			add_trait = deviants_succubus
+			add_character_modifier = deviants_prostitute
+		}
+	}
+	auto_accept = yes
+}
+
+
