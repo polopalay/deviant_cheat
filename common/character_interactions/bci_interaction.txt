@@ -155,6 +155,7 @@ bci_child = {
 						limit = { scope:recipient = { patrilinear_marriage = yes } }
 						create_character = {
 							age = 0
+							location = primary_spouse.capital_province
 							mother = scope:recipient
 							father = primary_spouse
 							dynasty_house = primary_spouse.house
@@ -168,6 +169,7 @@ bci_child = {
 							limit = { exists = primary_spouse }
 							create_character = {
 								age = 0
+								location = capital_province
 								mother = scope:recipient
 								father = primary_spouse
 								dynasty_house = house
@@ -179,6 +181,7 @@ bci_child = {
 						else = {
 							create_character = {
 								age = 0
+								location = capital_province
 								mother = scope:recipient
 								dynasty_house = house
 								culture = culture
@@ -193,6 +196,7 @@ bci_child = {
 						limit = { patrilinear_marriage = yes }
 						create_character = {
 							age = 0
+							location = primary_spouse.capital_province
 							mother = scope:recipient
 							father = primary_spouse
 							dynasty_house = primary_spouse.house
@@ -206,6 +210,7 @@ bci_child = {
 							limit = { exists = primary_spouse }
 							create_character = {
 								age = 0
+								location = capital_province
 								mother = scope:recipient
 								father = primary_spouse
 								dynasty_house = house
@@ -217,6 +222,7 @@ bci_child = {
 						else = {
 							create_character = {
 								age = 0
+								location = capital_province
 								mother = scope:recipient
 								dynasty_house = house
 								culture = culture

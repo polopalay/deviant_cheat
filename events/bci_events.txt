@@ -38,13 +38,6 @@ bci_events.1 = {
 		trigger_event = bci_events.1
 	}
 	option = {
-		name = bci_sub_stress
-		scope:currency_scope = {
-			add_stress = -1000
-		}
-		trigger_event = bci_events.1
-	}
-	option = {
 		name = bci_add_age
 		scope:currency_scope = {
 			change_age = 1
