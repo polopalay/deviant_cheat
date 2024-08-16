@@ -10,4 +10,5 @@
  bci_add_age: "Add 1 year old"
  bci_sub_age: "Reduce 1 year old"
  bci_change_religion: "Change religion"
+ bci_change_culture: "Change culture"
  bci_events.end: "End"
