@@ -1713,14 +1713,13 @@ bci_have_sex = {
 	icon = lover
 	desc = bci_have_sex.desc
     	use_diplomatic_range = no
-	is_shown = { scope:actor = { is_ai = no } }
+	is_shown = { 
+		scope:actor = { is_ai = no is_adult = yes } 
+		scope:recipient = { is_adult = yes } 
+	}
 	on_accept = {
 		scope:recipient = {
 		   	had_sex_with_effect = { CHARACTER = scope:actor PREGNANCY_CHANCE = 100 }
-			is_adult = yes
-		}
-		scope:actor = {
-			is_adult = yes
 		}
 	}
 	auto_accept = yes
