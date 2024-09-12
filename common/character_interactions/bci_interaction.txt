@@ -4,13 +4,13 @@ bci_change = {
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
-	
+
 	is_shown = {
 		scope:actor = {
 			is_ai = no
 		}
 	}
-	
+
 	on_send = {
 		scope:actor = {
 			save_scope_as = actor_scope
@@ -56,13 +56,13 @@ bci_kill = {
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
-	
+
 	is_shown = {
 		scope:actor = {
 			is_ai = no
 		}
 	}
-	
+
 	on_send = {
 		scope:recipient = {
 			death = natural
@@ -86,23 +86,23 @@ bci_change_government = {
 		}
 	}
 	send_option = {
-		flag = bci_feudal	
+		flag = bci_feudal
 		localization = feudal_government
 	}
 	send_option = {
-		flag = bci_clan	
+		flag = bci_clan
 		localization = clan_government
 	}
 	send_option = {
-		flag = bci_tribal	
+		flag = bci_tribal
 		localization = tribal_government
 	}
 	send_option = {
-		flag = bci_theocracy	
+		flag = bci_theocracy
 		localization = theocracy_government
 	}
 	send_option = {
-		flag = bci_republic	
+		flag = bci_republic
 		localization = republic_government
 	}
 	send_options_exclusive = yes
@@ -135,7 +135,7 @@ bci_change_government = {
 
 bci_child = {
 	icon = pregnant
-    	use_diplomatic_range = no
+	use_diplomatic_range = no
 	is_shown = {
 		scope:actor = {
 			is_ai = no
@@ -242,7 +242,7 @@ bci_add_character = {
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
-	
+
 	is_shown = {
 		NOT = { scope:recipient = scope:actor }
 		scope:recipient = {
@@ -257,7 +257,7 @@ bci_add_character = {
 			is_landed = yes
 		}
 	}
-	
+
 	on_accept = {
 		scope:actor = {
 			add_courtier = scope:recipient
@@ -293,7 +293,7 @@ bci_vassal_inter = {
 	auto_accept = yes
 	use_diplomatic_range = no
 	ignores_pending_interaction_block = yes
-	
+
 	is_shown = {
 		NOT = { scope:recipient = scope:actor }
 		scope:recipient = {
@@ -320,7 +320,7 @@ bci_revoke_character = {
 	special_interaction = revoke_title_interaction
 	target_type = title
 	target_filter = recipient_domain_titles
-	
+
 	is_shown = {
 		NOT = { scope:actor = scope:recipient }
 		scope:recipient = {
@@ -330,11 +330,11 @@ bci_revoke_character = {
 			is_ai = no
 		}
 	}
-	
+
 	is_valid_showing_failures_only = {
 		scope:actor = { is_ai = no }
 	}
-	
+
 	can_be_picked_title = {
 		scope:target = {
 			holder = scope:recipient
@@ -350,18 +350,24 @@ bci_befriend_character = {
 
 	is_shown = {
 		NOT = { scope:recipient = scope:actor }
-		scope:actor = { 
+		scope:actor = {
 			is_ai = no
-			NOR = {
-				has_relation_friend = scope:recipient
-				has_relation_best_friend = scope:recipient
+			OR = {
+				NOT = { has_relation_friend = scope:recipient }
+				AND = {
+					has_relation_friend = scope:recipient
+					any_relation = {
+						type = best_friend
+						count = 0
+					}
+				}
 			}
 		}
 	}
 
 	on_accept = {
-		scope:actor = {		
-			if = { 
+		scope:actor = {
+			if = {
 				limit = { has_relation_friend = scope:recipient }
 				set_relation_best_friend = scope:recipient
 			}
@@ -378,7 +384,7 @@ bci_lover_character = {
 
 	is_shown = {
 		NOT = { scope:recipient = scope:actor }
-		scope:actor = { 
+		scope:actor = {
 			is_ai = no
 			NOR = {
 				has_relation_lover = scope:recipient
@@ -388,8 +394,8 @@ bci_lover_character = {
 	}
 
 	on_accept = {
-		scope:actor = {		
-			if = { 
+		scope:actor = {
+			if = {
 				limit = { has_relation_lover = scope:recipient }
 				set_relation_soulmate = scope:recipient
 			}
@@ -456,7 +462,7 @@ bci_secret = {
 				NOT = { any_secret = { secret_type = secret_witch } }
 			}
 		}
-		flag = witch	
+		flag = witch
 		localization = secret_witch
 	}
 	send_option = {
@@ -465,7 +471,7 @@ bci_secret = {
 				NOT = { any_secret = { secret_type = secret_deviant } }
 			}
 		}
-		flag = deviant	
+		flag = deviant
 		localization = secret_deviant
 	}
 	send_option = {
@@ -474,7 +480,7 @@ bci_secret = {
 				NOT = { any_secret = { secret_type = secret_cannibal } }
 			}
 		}
-		flag = cannibal	
+		flag = cannibal
 		localization = secret_cannibal
 	}
 	send_options_exclusive = yes
@@ -506,15 +512,15 @@ bci_nickname = {
 		scope:actor = { is_ai = no }
 	}
 	send_option = {
-		flag = lewd	
+		flag = lewd
 		localization = nick_the_lewd
 	}
 	send_option = {
-		flag = lecher	
+		flag = lecher
 		localization = nick_the_lecher
 	}
 	send_option = {
-		flag = bewitched	
+		flag = bewitched
 		localization = nick_the_bewitched
 	}
 	send_option = {
@@ -719,19 +725,19 @@ bci_remove_status = {
 				has_trait = blind
 				has_trait = sickly
 				has_trait = infirm
-				has_trait = incapable 
+				has_trait = incapable
 				has_trait = leper
-				has_trait = ill 
-				has_trait = pneumonic 
-				has_trait = gout_ridden 
-				has_trait = typhus 
-				has_trait = consumption 
-				has_trait = cancer 
-				has_trait = great_pox 
-				has_trait = smallpox 
-				has_trait = bubonic_plague 
-				has_trait = lovers_pox 
-				has_trait = great_pox 
+				has_trait = ill
+				has_trait = pneumonic
+				has_trait = gout_ridden
+				has_trait = typhus
+				has_trait = consumption
+				has_trait = cancer
+				has_trait = great_pox
+				has_trait = smallpox
+				has_trait = bubonic_plague
+				has_trait = lovers_pox
+				has_trait = great_pox
 				has_trait = possessed_genetic
 				has_trait = bubonic_plague
 				has_trait = measles
@@ -833,7 +839,7 @@ bci_remove_status = {
 			remove_trait = blind
 			remove_trait = sickly
 			remove_trait = infirm
-			remove_trait = incapable 
+			remove_trait = incapable
 			remove_trait = leper
 			remove_trait = wounded_1
 			remove_trait = wounded_2
@@ -880,149 +886,149 @@ bci_personality_trait = {
 	is_shown = {
 		scope:actor = { is_ai = no }
 	}
-	
+
 	send_option = {
-		flag = lustful	
+		flag = lustful
 		localization = trait_lustful
 	}
 	send_option = {
-		flag = chaste	
+		flag = chaste
 		localization = trait_chaste
 	}
 	send_option = {
-		flag = gluttonous	
+		flag = gluttonous
 		localization = trait_gluttonous
 	}
 	send_option = {
-		flag = temperate	
+		flag = temperate
 		localization = trait_temperate
 	}
 	send_option = {
-		flag = greedy	
+		flag = greedy
 		localization = trait_greedy
 	}
 	send_option = {
-		flag = generous	
+		flag = generous
 		localization = trait_generous
 	}
 	send_option = {
-		flag = lazy	
+		flag = lazy
 		localization = trait_lazy
 	}
 	send_option = {
-		flag = diligent	
+		flag = diligent
 		localization = trait_diligent
 	}
 	send_option = {
-		flag = wrathful	
+		flag = wrathful
 		localization = trait_wrathful
 	}
 	send_option = {
-		flag = calm	
+		flag = calm
 		localization = trait_calm
 	}
 	send_option = {
-		flag = patient	
+		flag = patient
 		localization = trait_patient
 	}
 	send_option = {
-		flag = impatient	
+		flag = impatient
 		localization = trait_impatient
 	}
 	send_option = {
-		flag = arrogant	
+		flag = arrogant
 		localization = trait_arrogant
 	}
 	send_option = {
-		flag = humble	
+		flag = humble
 		localization = trait_humble
 	}
 	send_option = {
-		flag = deceitful	
+		flag = deceitful
 		localization = trait_deceitful
 	}
 	send_option = {
-		flag = honest	
+		flag = honest
 		localization = trait_honest
 	}
 	send_option = {
-		flag = craven	
+		flag = craven
 		localization = trait_craven
 	}
 	send_option = {
-		flag = brave	
+		flag = brave
 		localization = trait_brave
 	}
 	send_option = {
-		flag = shy	
+		flag = shy
 		localization = trait_shy
 	}
 	send_option = {
-		flag = gregarious	
+		flag = gregarious
 		localization = trait_gregarious
 	}
 	send_option = {
-		flag = ambitious	
+		flag = ambitious
 		localization = trait_ambitious
 	}
 	send_option = {
-		flag = content	
+		flag = content
 		localization = trait_content
 	}
 	send_option = {
-		flag = arbitrary	
+		flag = arbitrary
 		localization = trait_arbitrary
 	}
 	send_option = {
-		flag = just	
+		flag = just
 		localization = trait_just
 	}
 	send_option = {
-		flag = cynical	
+		flag = cynical
 		localization = trait_cynical
 	}
 	send_option = {
-		flag = zealous	
+		flag = zealous
 		localization = trait_zealous
 	}
 	send_option = {
-		flag = paranoid	
+		flag = paranoid
 		localization = trait_paranoid
 	}
 	send_option = {
-		flag = trusting	
+		flag = trusting
 		localization = trait_trusting
 	}
 	send_option = {
-		flag = compassionate	
+		flag = compassionate
 		localization = trait_compassionate
 	}
 	send_option = {
-		flag = callous	
+		flag = callous
 		localization = trait_callous
 	}
 	send_option = {
-		flag = sadistic	
+		flag = sadistic
 		localization = trait_sadistic
 	}
 	send_option = {
-		flag = stubborn	
+		flag = stubborn
 		localization = trait_stubborn
 	}
 	send_option = {
-		flag = fickle	
+		flag = fickle
 		localization = trait_fickle
 	}
 	send_option = {
-		flag = eccentric	
+		flag = eccentric
 		localization = trait_eccentric
 	}
 	send_option = {
-		flag = vengeful	
+		flag = vengeful
 		localization = trait_vengeful
 	}
 	send_option = {
-		flag = forgiving	
+		flag = forgiving
 		localization = trait_forgiving
 	}
 
@@ -1332,31 +1338,31 @@ bci_lifestyle_trait = {
 	}
 
 	send_option = {
-		flag = lifestyle_reveler	
+		flag = lifestyle_reveler
 		localization = trait_lifestyle_reveler
 	}
 	send_option = {
-		flag = lifestyle_blademaster	
+		flag = lifestyle_blademaster
 		localization = trait_lifestyle_blademaster
 	}
 	send_option = {
-		flag = lifestyle_hunter	
+		flag = lifestyle_hunter
 		localization = trait_lifestyle_hunter
 	}
 	send_option = {
-		flag = lifestyle_mystic	
+		flag = lifestyle_mystic
 		localization = trait_lifestyle_mystic
 	}
 	send_option = {
-		flag = lifestyle_physician	
+		flag = lifestyle_physician
 		localization = trait_lifestyle_physician
 	}
 	send_option = {
-		flag = lifestyle_herbalist	
+		flag = lifestyle_herbalist
 		localization = trait_lifestyle_herbalist
 	}
 	send_option = {
-		flag = lifestyle_gardener	
+		flag = lifestyle_gardener
 		localization = trait_lifestyle_gardener
 	}
 
@@ -1393,10 +1399,10 @@ bci_lifestyle_trait = {
 					add_trait = lifestyle_hunter
 				}
 				else_if = {
-					limit = { 
+					limit = {
 						OR = {
-							has_trait_xp = { trait = lifestyle_hunter track = hunter value < 100 } 
-							has_trait_xp = { trait = lifestyle_hunter track = falconer value < 100 } 
+							has_trait_xp = { trait = lifestyle_hunter track = hunter value < 100 }
+							has_trait_xp = { trait = lifestyle_hunter track = falconer value < 100 }
 						}
 					}
 					add_trait_xp = { trait = lifestyle_hunter track = hunter value = 100 }
@@ -1460,63 +1466,63 @@ bci_fame_trait = {
 	}
 
 	send_option = {
-		flag = journaller	
+		flag = journaller
 		localization = trait_journaller
 	}
 	send_option = {
-		flag = confider	
+		flag = confider
 		localization = trait_confider
 	}
 	send_option = {
-		flag = athletic	
+		flag = athletic
 		localization = trait_athletic
 	}
 	send_option = {
-		flag = order_member	
+		flag = order_member
 		localization = trait_order_member
 	}
 	send_option = {
-		flag = berserker	
+		flag = berserker
 		localization = trait_berserker
 	}
 	send_option = {
-		flag = shieldmaiden	
+		flag = shieldmaiden
 		localization = trait_shieldmaiden_female
 	}
 	send_option = {
-		flag = varangian	
+		flag = varangian
 		localization = trait_varangian
 	}
 	send_option = {
-		flag = viking	
+		flag = viking
 		localization = trait_viking_has_longships
 	}
 	send_option = {
-		flag = adventurer	
+		flag = adventurer
 		localization = trait_adventurer
 	}
 	send_option = {
-		flag = heresiarch	
+		flag = heresiarch
 		localization = trait_heresiarch
 	}
 	send_option = {
-		flag = peasant_leader	
+		flag = peasant_leader
 		localization = trait_peasant_leader
 	}
 	send_option = {
-		flag = poet	
+		flag = poet
 		localization = trait_poet
 	}
 	send_option = {
-		flag = deviant	
+		flag = deviant
 		localization = trait_deviant
 	}
 	send_option = {
-		flag = cannibal	
+		flag = cannibal
 		localization = trait_cannibal
 	}
 	send_option = {
-		flag = witch	
+		flag = witch
 		localization = trait_witch
 	}
 	on_accept = {
@@ -1647,20 +1653,19 @@ bci_fame_trait = {
 
 bci_create_lesser_succubus = {
 	icon = lesser_devil
-	desc = deviants_create_lesser_succubus_interaction.desc
-    	use_diplomatic_range = no
+	use_diplomatic_range = no
 	is_shown = {
 		scope:recipient = {
 			is_female = yes
 			age >= 18
 		}
-		scope:actor = { has_trait = deviants_succubus }
+		scope:actor = { has_trait = succubus }
 	}
 	on_accept = {
 		scope:recipient = {
-			remove_trait = deviants_succubus
-			remove_trait = deviants_lesser_succubus
-			remove_trait = deviants_virgin
+			remove_trait = succubus
+			remove_trait = lesser_succubus
+			remove_trait = virgin
 
 			add_secret = { type = secret_deviant }
 			add_secret = { type = secret_witch }
@@ -1669,8 +1674,7 @@ bci_create_lesser_succubus = {
 				give_prostitution_nickname = yes
 			}
 			mind_break_personality = yes
-			add_trait = deviants_lesser_succubus
-			add_character_modifier = deviants_prostitute
+			add_trait = lesser_succubus
 		}
 	}
 	auto_accept = yes
@@ -1678,20 +1682,19 @@ bci_create_lesser_succubus = {
 
 bci_create_succubus = {
 	icon = devil
-	desc = deviants_create_succubus_interaction.desc
-    	use_diplomatic_range = no
+	use_diplomatic_range = no
 	is_shown = {
 		scope:recipient = {
 			is_female = yes
 			age >= 18
 		}
-		scope:actor = { has_trait = deviants_succubus }
+		scope:actor = { has_trait = succubus }
 	}
 	on_accept = {
 		scope:recipient = {
-			remove_trait = deviants_succubus
-			remove_trait = deviants_lesser_succubus
-			remove_trait = deviants_virgin
+			remove_trait = succubus
+			remove_trait = lesser_succubus
+			remove_trait = virgin
 			add_secret = { type = secret_deviant }
 			add_secret = { type = secret_witch }
 			mind_break_personality = yes
@@ -1699,8 +1702,7 @@ bci_create_succubus = {
 				limit = { have_devil_nicknames_trigger = no }
 				give_prostitution_nickname = yes
 			}
-			add_trait = deviants_succubus
-			add_character_modifier = deviants_prostitute
+			add_trait = succubus
 		}
 	}
 	auto_accept = yes
@@ -1709,16 +1711,15 @@ bci_create_succubus = {
 
 bci_have_sex = {
 	icon = lover
-	desc = bci_have_sex.desc
-    	use_diplomatic_range = no
-	is_shown = { 
-		scope:actor = { is_ai = no is_adult = yes } 
-		scope:recipient = { is_adult = yes } 
+	use_diplomatic_range = no
+	is_shown = {
+		scope:actor = { is_ai = no is_adult = yes }
+		scope:recipient = { is_adult = yes }
 		NOT = { scope:actor = scope:recipient }
 	}
 	on_accept = {
 		scope:recipient = {
-		   	had_sex_with_effect = { CHARACTER = scope:actor PREGNANCY_CHANCE = 100 }
+			had_sex_with_effect = { CHARACTER = scope:actor PREGNANCY_CHANCE = 100 }
 		}
 	}
 	auto_accept = yes
