@@ -1719,7 +1719,7 @@ bci_have_sex = {
 	}
 	on_accept = {
 		scope:recipient = {
-			had_sex_with_effect = { CHARACTER = scope:actor PREGNANCY_CHANCE = 100 }
+			prostitute_effect= { PROSTITUTE = scope:actor PREGNANCY_CHANCE = 100 }
 		}
 	}
 	auto_accept = yes
