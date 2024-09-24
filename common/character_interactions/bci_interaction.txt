@@ -1665,7 +1665,7 @@ bci_create_lesser_succubus = {
 		scope:recipient = {
 			remove_trait = succubus
 			remove_trait = lesser_succubus
-			remove_trait = virgin
+			remove_trait = deviant_virgin
 
 			add_secret = { type = secret_deviant }
 			add_secret = { type = secret_witch }
@@ -1694,7 +1694,7 @@ bci_create_succubus = {
 		scope:recipient = {
 			remove_trait = succubus
 			remove_trait = lesser_succubus
-			remove_trait = virgin
+			remove_trait = deviant_virgin
 			add_secret = { type = secret_deviant }
 			add_secret = { type = secret_witch }
 			mind_break_personality = yes
