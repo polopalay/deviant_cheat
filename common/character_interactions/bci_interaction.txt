@@ -1657,9 +1657,8 @@ bci_create_lesser_succubus = {
 	is_shown = {
 		scope:recipient = {
 			is_female = yes
-			age >= 18
 		}
-		scope:actor = { has_trait = succubus }
+		scope:actor = { OR = { has_trait = succubus has_trait = lesser_succubus } }
 	}
 	on_accept = {
 		scope:recipient = {
@@ -1675,6 +1674,8 @@ bci_create_lesser_succubus = {
 			}
 			mind_break_personality = yes
 			add_trait = lesser_succubus
+			set_immortal_age = 18
+			add_trait_xp = { trait = lesser_succubus value = 100 }
 		}
 	}
 	auto_accept = yes
@@ -1686,9 +1687,8 @@ bci_create_succubus = {
 	is_shown = {
 		scope:recipient = {
 			is_female = yes
-			age >= 18
 		}
-		scope:actor = { has_trait = succubus }
+		scope:actor = { OR = { has_trait = succubus has_trait = lesser_succubus } }
 	}
 	on_accept = {
 		scope:recipient = {
@@ -1703,6 +1703,11 @@ bci_create_succubus = {
 				give_prostitution_nickname = yes
 			}
 			add_trait = succubus
+			set_immortal_age = 18
+			add_trait_xp = { trait = succubus track = power value = 100 }
+			add_trait_xp = { trait = succubus track = daring value = 100 }
+			add_trait_xp = { trait = succubus track = corruption value = 100 }
+			add_trait_xp = { trait = succubus track = loyalty value = 100 }
 		}
 	}
 	auto_accept = yes
