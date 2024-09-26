@@ -254,7 +254,6 @@ bci_add_character = {
 		}
 		scope:actor = {
 			is_ai = no
-			is_landed = yes
 		}
 	}
 
@@ -1665,17 +1664,10 @@ bci_create_lesser_succubus = {
 			remove_trait = succubus
 			remove_trait = lesser_succubus
 			remove_trait = deviant_virgin
-
-			add_secret = { type = secret_deviant }
-			add_secret = { type = secret_witch }
-			if = {
-				limit = { have_devil_nicknames_trigger = no }
-				give_prostitution_nickname = yes
-			}
 			mind_break_personality = yes
 			add_trait = lesser_succubus
 			set_immortal_age = 18
-			add_trait_xp = { trait = lesser_succubus value = 100 }
+			#add_trait_xp = { trait = lesser_succubus value = 100 }
 		}
 	}
 	auto_accept = yes
@@ -1695,19 +1687,13 @@ bci_create_succubus = {
 			remove_trait = succubus
 			remove_trait = lesser_succubus
 			remove_trait = deviant_virgin
-			add_secret = { type = secret_deviant }
-			add_secret = { type = secret_witch }
 			mind_break_personality = yes
-			if = {
-				limit = { have_devil_nicknames_trigger = no }
-				give_prostitution_nickname = yes
-			}
 			add_trait = succubus
 			set_immortal_age = 18
-			add_trait_xp = { trait = succubus track = power value = 100 }
-			add_trait_xp = { trait = succubus track = daring value = 100 }
-			add_trait_xp = { trait = succubus track = corruption value = 100 }
-			add_trait_xp = { trait = succubus track = loyalty value = 100 }
+			#add_trait_xp = { trait = succubus track = power value = 100 }
+			#add_trait_xp = { trait = succubus track = daring value = 100 }
+			#add_trait_xp = { trait = succubus track = corruption value = 100 }
+			#add_trait_xp = { trait = succubus track = loyalty value = 100 }
 		}
 	}
 	auto_accept = yes
@@ -1729,3 +1715,28 @@ bci_have_sex = {
 	}
 	auto_accept = yes
 }
+
+bci_make_laamp = {
+	use_diplomatic_range = no
+	icon = request_invasion_sponsorship_interaction
+
+	is_shown = {
+		scope:actor = { is_ai = no }
+	}
+
+	auto_accept = yes
+
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { is_ruler = yes }
+				depose = yes
+			}
+			create_landless_adventurer_title_effect = {
+				REASON = flag:voluntary
+				FLAVOR_CHAR = scope:recipient
+			}
+		}
+	}
+}
+
