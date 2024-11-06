@@ -12,15 +12,54 @@ bci_change = {
 	}
 
 	on_send = {
-		scope:actor = {
-			save_scope_as = actor_scope
-		}
 		scope:recipient = {
 			save_scope_as = currency_scope
 		}
 		scope:actor = {
-			save_actor_as = currency_actor
+			save_scope_as = actor_scope
 			trigger_event = bci_events.1
+		}
+	}
+}
+
+bci_change_religion = {
+	icon = demand_conversion_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	common_interaction = yes
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		NOT = { scope:actor.faith = scope:recipient.faith }
+	}
+
+	on_accept = {
+		scope:recipient = {
+			set_character_faith_with_conversion = scope:actor.faith
+		}
+	}
+}
+
+bci_change_culture = {
+	icon = icon_culture
+	auto_accept = yes
+	use_diplomatic_range = no
+	common_interaction = yes
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		NOT = { scope:actor.culture = scope:recipient.culture }
+	}
+
+	on_accept = {
+		scope:recipient = {
+			set_culture = scope:actor.culture
 		}
 	}
 }
@@ -30,6 +69,7 @@ bci_switch_character = {
 	common_interaction = yes
 	auto_accept = yes
 	use_diplomatic_range = no
+	common_interaction = yes
 	ignores_pending_interaction_block = yes
 
 	is_shown = {
@@ -1657,17 +1697,17 @@ bci_create_lesser_succubus = {
 		scope:recipient = {
 			is_female = yes
 		}
-		scope:actor = { OR = { has_trait = succubus has_trait = lesser_succubus } }
+		scope:actor = { OR = { has_trait = sbs_succubus has_trait = sbs_lesser_succubus has_trait = sbs_demon } }
 	}
 	on_accept = {
 		scope:recipient = {
-			remove_trait = succubus
-			remove_trait = lesser_succubus
+			remove_trait = sbs_succubus
+			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
 			mind_break_personality = yes
-			add_trait = lesser_succubus
+			add_trait = sbs_lesser_succubus
 			set_immortal_age = 18
-			#add_trait_xp = { trait = lesser_succubus value = 100 }
+			#add_trait_xp = { trait = sbs_lesser_succubus value = 100 }
 		}
 	}
 	auto_accept = yes
@@ -1680,20 +1720,20 @@ bci_create_succubus = {
 		scope:recipient = {
 			is_female = yes
 		}
-		scope:actor = { OR = { has_trait = succubus has_trait = lesser_succubus } }
+		scope:actor = { OR = { has_trait = sbs_succubus has_trait = sbs_lesser_succubus has_trait = sbs_demon } }
 	}
 	on_accept = {
 		scope:recipient = {
-			remove_trait = succubus
-			remove_trait = lesser_succubus
+			remove_trait = sbs_succubus
+			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
 			mind_break_personality = yes
-			add_trait = succubus
+			add_trait = sbs_succubus
 			set_immortal_age = 18
-			#add_trait_xp = { trait = succubus track = power value = 100 }
-			#add_trait_xp = { trait = succubus track = daring value = 100 }
-			#add_trait_xp = { trait = succubus track = corruption value = 100 }
-			#add_trait_xp = { trait = succubus track = loyalty value = 100 }
+			#add_trait_xp = { trait = sbs_succubus track = power value = 100 }
+			#add_trait_xp = { trait = sbs_succubus track = daring value = 100 }
+			#add_trait_xp = { trait = sbs_succubus track = corruption value = 100 }
+			#add_trait_xp = { trait = sbs_succubus track = loyalty value = 100 }
 		}
 	}
 	auto_accept = yes
@@ -1740,3 +1780,65 @@ bci_make_laamp = {
 	}
 }
 
+#bci_create_artifact = {
+#	use_diplomatic_range = no
+#	icon = request_invasion_sponsorship_interaction
+#
+#	is_shown = {
+#		scope:actor = { is_ai = no }
+#	}
+#
+#	auto_accept = yes
+#
+#	on_accept = {
+#		scope:recipient = {
+#			trigger_event = sbs_event.0550
+#		}
+#	}
+#}
+
+#bci_make_laamp_2 = {
+#	use_diplomatic_range = no
+#	icon = request_invasion_sponsorship_interaction
+#
+#	is_shown = {
+#		scope:actor = { is_ai = no }
+#	}
+#
+#	auto_accept = yes
+#
+#	on_accept = {
+#		scope:recipient = {
+#		if = {
+#			limit = { exists = domicile }
+#			domicile = {
+#				change_provisions = {
+#					value = 1000
+#				}
+#			}
+#		}
+#		}
+#	}
+#}
+
+#bci_make_contract_1 = {
+#	use_diplomatic_range = no
+#	icon = request_invasion_sponsorship_interaction
+#
+#	is_shown = {
+#		scope:actor = { is_ai = no }
+#	}
+#
+#	auto_accept = yes
+#
+#	on_accept = {
+#		scope:actor = {
+#			create_task_contract = {
+#				task_contract_type = request_prostitute
+#				location = scope:recipient.capital_province
+#				task_contract_employer = scope:recipient
+#				task_contract_tier = scope:recipient.task_contract_tier_value
+#			}
+#		}
+#	}
+#}

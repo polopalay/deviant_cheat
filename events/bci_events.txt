@@ -66,26 +66,6 @@ bci_events.1 = {
 		trigger_event = bci_events.1
 	}
 	option = {
-		trigger = {
-			NOT = { scope:currency_scope.faith = scope:actor_scope.faith }
-		}
-		name = bci_change_religion
-		scope:currency_scope = {
-			set_character_faith = scope:actor_scope.faith
-		}
-		trigger_event = bci_events.1
-	}
-	option = {
-		trigger = {
-			NOT = { scope:currency_scope.culture = scope:actor_scope.culture }
-		}
-		name = bci_change_culture
-		scope:currency_scope = {
-			set_culture = scope:actor_scope.culture
-		}
-		trigger_event = bci_events.1
-	}
-	option = {
 		name = bci_events.end
 	}
 }
