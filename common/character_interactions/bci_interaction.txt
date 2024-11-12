@@ -33,12 +33,38 @@ bci_change_religion = {
 		scope:actor = {
 			is_ai = no
 		}
-		NOT = { scope:actor.faith = scope:recipient.faith }
 	}
+
+	send_option = {
+		flag = bci_faith
+		localization = "All Vassal"
+	}
+	send_options_exclusive = no
 
 	on_accept = {
 		scope:recipient = {
 			set_character_faith_with_conversion = scope:actor.faith
+			capital_province.county = {
+				set_county_faith = scope:actor.faith
+			}
+			if = {
+				limit = { scope:bci_faith = yes }
+				every_courtier = {
+					limit = { is_close_family_of = prev }
+					set_character_faith_with_conversion = scope:actor.faith
+				}
+				every_vassal = {
+					limit = { primary_title.tier >= tier_county }
+					set_character_faith_with_conversion = scope:actor.faith
+					capital_province.county = {
+						set_county_faith = scope:actor.faith
+					}
+					every_courtier = {
+						limit = { is_close_family_of = prev }
+						set_character_faith_with_conversion = scope:actor.faith
+					}
+				}
+			}
 		}
 	}
 }
@@ -54,12 +80,38 @@ bci_change_culture = {
 		scope:actor = {
 			is_ai = no
 		}
-		NOT = { scope:actor.culture = scope:recipient.culture }
 	}
+
+	send_option = {
+		flag = vassal
+		localization = "All Vassal"
+	}
+	send_options_exclusive = no
 
 	on_accept = {
 		scope:recipient = {
 			set_culture = scope:actor.culture
+			capital_province.county = {
+				set_county_culture = scope:actor.culture
+			}
+			if = {
+				limit = { scope:vassal = yes }
+				every_courtier = {
+					limit = { is_close_family_of = prev }
+					set_culture = scope:actor.culture
+				}
+				every_vassal = {
+					limit = { primary_title.tier >= tier_county }
+					set_culture = scope:actor.culture
+					capital_province.county = {
+						set_county_culture = scope:actor.culture
+					}
+					every_courtier = {
+						limit = { is_close_family_of = prev }
+						set_culture = scope:actor.culture
+					}
+				}
+			}
 		}
 	}
 }
@@ -145,6 +197,10 @@ bci_change_government = {
 		flag = bci_republic
 		localization = republic_government
 	}
+	send_option = {
+		flag = administrative
+		localization = "Administrative"
+	}
 	send_options_exclusive = yes
 
 	on_accept = {
@@ -169,6 +225,126 @@ bci_change_government = {
 				limit = { scope:bci_republic = yes }
 				change_government = republic_government
 			}
+			else_if = {
+				limit = { scope:administrative = yes }
+				convert_to_administrative_from_feudalism_effect = yes
+			}
+		}
+	}
+}
+
+bci_negotiate_settlement_interaction = {
+	common_interaction = yes
+	category = interaction_category_diplomacy
+	icon = negotiate_settlement_interaction
+
+	desc = negotiate_settlement_interaction_desc
+	target_type = title
+	target_filter = actor_domain_titles
+
+
+	is_shown = {
+		has_ep3_dlc_trigger = yes
+		scope:actor = { is_landed = yes }
+		scope:recipient = {
+			government_has_flag = government_is_landless_adventurer
+		}
+		NOT = { scope:recipient = scope:actor }
+	}
+
+	can_be_picked_title = {
+		custom_tooltip = {
+			text = purchase_land_tier_tt
+			scope:target = {
+				tier >= tier_county
+				tier <= tier_duchy
+			}
+		}
+		custom_tooltip = {
+			text = purchase_land_primary_tt
+			NOT = { scope:target = scope:actor.primary_title }
+		}
+	}
+
+	on_accept = {
+		scope:actor = { save_scope_as = adventurer }
+		scope:target = {
+			add_to_list = offered_titles
+			if = {
+				limit = { tier = tier_duchy }
+				every_de_jure_county = {
+					limit = { ep3_negotiate_settlement_valid_county_trigger = yes }
+					add_to_list = offered_titles
+				}
+			}
+		}
+		ordered_in_list = {
+			list = offered_titles
+			save_scope_as = new_primary_title
+		}
+		save_scope_value_as = {
+			name = negotiate_settlement_legitimacy_cost
+			value = {
+				value = 0
+				every_in_list = {
+					list = offered_titles
+					if = {
+						limit = { tier = tier_county }
+						add = -25
+					}
+					else = { add = -50 }
+				}
+				multiply = scope:actor.highest_held_title_tier
+			}
+		}
+		show_as_tooltip = { negotiate_settlement_interaction_effect = yes }
+		scope:actor = { trigger_event = ep3_laamps.0300 }
+	}
+	auto_accept = yes
+}
+
+bci_create_kingdom = {
+	icon = grant_vassal_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		scope:recipient = {
+			is_ruler = yes
+			primary_title.tier = tier_duchy
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			create_custom_kingdom_effect= yes
+		}
+	}
+}
+
+bci_create_empire = {
+	icon = grant_vassal_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		scope:recipient = {
+			is_ruler = yes
+			primary_title.tier = tier_kingdom
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			create_custom_empire_effect= yes
 		}
 	}
 }
@@ -347,7 +523,9 @@ bci_vassal_inter = {
 	}
 
 	on_accept = {
-		offer_vassalization_interaction_effect = yes
+		scope:recipient = {
+			offer_vassalization_interaction_effect = yes
+		}
 	}
 }
 
@@ -379,6 +557,24 @@ bci_revoke_character = {
 			holder = scope:recipient
 		}
 	}
+}
+
+bci_set_heir = {
+	icon = icon_declare_me_regent
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:actor = {
+			is_ai = no
+		}
+	}
+	on_accept = {
+		scope:actor = {
+			set_designated_heir = scope:recipient
+		}
+	}	
 }
 
 bci_befriend_character = {

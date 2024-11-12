@@ -27,3 +27,7 @@
  bci_create_lesser_succubus: "Create lesser succubus"
  bci_create_succubus: "Create succubus"
  bci_have_sex: "Have sex"
+ bci_set_heir: "Set Heir"
+ bci_create_kingdom: "Create Kingdom"
+ bci_create_empire: "Create Empire"
+ bci_negotiate_settlement_interaction: "Negotiate Settlement"
