@@ -234,16 +234,16 @@ bci_change_government = {
 }
 
 bci_negotiate_settlement_interaction = {
-	common_interaction = yes
-	category = interaction_category_diplomacy
 	icon = negotiate_settlement_interaction
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	auto_accept = yes
 
-	desc = negotiate_settlement_interaction_desc
 	target_type = title
 	target_filter = actor_domain_titles
 
 
-	is_shown = {
+	is_valid = {
 		has_ep3_dlc_trigger = yes
 		scope:actor = { is_landed = yes }
 		scope:recipient = {
@@ -300,7 +300,6 @@ bci_negotiate_settlement_interaction = {
 		show_as_tooltip = { negotiate_settlement_interaction_effect = yes }
 		scope:actor = { trigger_event = ep3_laamps.0300 }
 	}
-	auto_accept = yes
 }
 
 bci_create_kingdom = {
@@ -656,6 +655,29 @@ bci_remove_rival = {
 	on_accept = {
 		scope:actor = {
 			remove_relation_rival = scope:recipient
+		}
+	}
+}
+
+bci_remove_rivals = {
+	icon = icon_hostile
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = { is_ai = no }
+		scope:recipient = {
+			any_relation = { type = rival }
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			every_relation = {
+				type = rival
+				remove_relation_rival = prev
+			}
 		}
 	}
 }
@@ -1021,32 +1043,6 @@ bci_remove_status = {
 			remove_character_flag = has_reading_glasses
 			remove_character_flag = is_naked
 			remove_character_flag = birth_mother_will_die
-			remove_trait = beauty_bad_1
-			remove_trait = beauty_bad_2
-			remove_trait = beauty_bad_3
-			remove_trait = intellect_bad_1
-			remove_trait = intellect_bad_2
-			remove_trait = intellect_bad_3
-			remove_trait = physique_bad_1
-			remove_trait = physique_bad_2
-			remove_trait = physique_bad_3
-			remove_trait = clubfooted
-			remove_trait = hunchbacked
-			remove_trait = lisping
-			remove_trait = stuttering
-			remove_trait = dwarf
-			remove_trait = giant
-			remove_trait = inbred
-			remove_trait = weak
-			remove_trait = dull
-			remove_trait = impotent
-			remove_trait = spindly
-			remove_trait = scaly
-			remove_trait = albino
-			remove_trait = wheezing
-			remove_trait = bleeder
-			remove_trait = infertile
-
 			remove_trait = drunkard
 			remove_trait = hashishiyah
 			remove_trait = rakish
@@ -1058,6 +1054,133 @@ bci_remove_status = {
 			remove_trait = contrite
 			remove_trait = comfort_eater
 			remove_trait = inappetetic
+			stress_impact = { base = massive_stress_impact_loss }
+
+			remove_trait = bastard
+			remove_trait = legitimized_bastard
+			remove_trait = disputed_heritage
+			remove_trait = child_of_concubine_female
+			remove_trait = child_of_concubine_male
+			remove_trait = wild_oat
+			remove_trait = bastard_founder
+
+			if = {
+				limit = {
+					has_trait = witch
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = witch }
+				}
+				if = {
+					limit = { NOT = { any_secret = { any_secret = secret_witch } } }
+					remove_trait = witch
+					add_secret = { type = secret_witch }
+					random_secret = {
+						limit = { secret_type = secret_witch }
+						reveal_to = scope:actor
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_trait = deviant
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = deviant }
+				}
+				remove_trait = deviant
+				if = {
+					limit = { NOT = { any_secret = { any_secret = secret_deviant } } }
+					add_secret = { type = secret_deviant }
+					random_secret = {
+						limit = { secret_type = secret_deviant }
+						reveal_to = scope:actor
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_trait = cannibal
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = cannibal }
+				}
+				remove_trait = cannibal
+				if = {
+					limit = { NOT = { any_secret = { any_secret = secret_cannibal } } }
+					add_secret = { type = secret_cannibal }
+					random_secret = {
+						limit = { secret_type = secret_cannibal }
+						reveal_to = scope:actor
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_trait = sodomite
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = sodomite }
+				}
+				remove_trait = sodomite
+				if = {
+					limit = { NOT = { any_secret = { any_secret = secret_homosexual } } }
+					add_secret = { type = secret_homosexual }
+					random_secret = {
+						limit = { secret_type = secret_homosexual }
+						reveal_to = scope:actor
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_trait = incestuous
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = incestuous }
+				}
+				remove_trait = incestuous
+				if = {
+					limit = { NOT = { any_secret = { any_secret = secret_incest } } }
+					add_secret = { type = secret_incest }
+					random_secret = {
+						limit = { secret_type = secret_incest }
+						reveal_to = scope:actor
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_trait = adulterer
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = adulterer }
+				}
+				remove_trait = adulterer
+			}
+			if = {
+				limit = {
+					has_trait = fornicator
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = fornicator }
+				}
+				remove_trait = fornicator
+			}
+			if = {
+				limit = {
+					has_trait = kinslayer_1
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = kinslayer_1 }
+				}
+				remove_trait = kinslayer_1
+			}
+			if = {
+				limit = {
+					has_trait = kinslayer_2
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = kinslayer_2 }
+				}
+				remove_trait = kinslayer_2
+			}
+			if = {
+				limit = {
+					has_trait = kinslayer_3
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = kinslayer_3 }
+				}
+				remove_trait = kinslayer_3
+			}
+			if = {
+				limit = {
+					has_trait = murderer
+					trait_is_shunned_or_criminal_in_faith_or_liege_trigger = { TRAIT = murderer }
+				}
+				remove_trait = murderer
+			}
 
 			remove_trait = depressed_1
 			remove_trait = depressed_genetic
@@ -1094,16 +1217,49 @@ bci_remove_status = {
 			recover_from_disease_effect = { DISEASE = bubonic_plague }
 			recover_from_disease_effect = { DISEASE = dysentery }
 			recover_from_disease_effect = { DISEASE = ergotism }
-			recover_from_disease_effect = { DISEASE = measles }
 
-			remove_trait = deviant
-			remove_trait = cannibal
-			remove_trait = sodomite
-			remove_trait = incestuous
-			remove_trait = adulterer
-			remove_trait = fornicator
-			remove_trait = murderer
-			remove_trait = witch
+			if = {
+				limit = {
+					OR = {
+						current_weight >= 25
+						current_weight <= -25
+					}
+				}
+				change_current_weight = -200
+				change_current_weight = 100
+			}
+
+			remove_trait = albino
+			remove_trait = lisping
+			remove_trait = stuttering
+			remove_trait = giant
+			remove_trait = scaly
+			remove_trait = clubfooted
+			remove_trait = dwarf
+			remove_trait = hunchbacked
+			remove_trait = infertile
+			remove_trait = wheezing
+			remove_trait = spindly
+			remove_trait = bleeder
+			remove_trait = weak
+			remove_trait = dull
+			if = {
+				limit = { OR = { has_trait = beauty_bad_1 has_trait = beauty_bad_2 has_trait = beauty_bad_3 } }
+				remove_trait = beauty_bad_1
+				remove_trait = beauty_bad_2
+				remove_trait = beauty_bad_3
+				hidden_effect = {
+						add_trait = beauty_good_1
+						remove_trait = beauty_good_1
+				}
+			}
+			remove_trait = intellect_bad_1
+			remove_trait = intellect_bad_2
+			remove_trait = intellect_bad_3
+			remove_trait = physique_bad_1
+			remove_trait = physique_bad_2
+			remove_trait = physique_bad_3
+			remove_trait = inbred
 			stress_impact = {
 				base = massive_stress_impact_loss
 			}

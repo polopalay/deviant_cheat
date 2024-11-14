@@ -31,3 +31,4 @@
  bci_create_kingdom: "Create Kingdom"
  bci_create_empire: "Create Empire"
  bci_negotiate_settlement_interaction: "Negotiate Settlement"
+ bci_remove_rivals: "Remove Rivals"
