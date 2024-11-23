@@ -243,7 +243,7 @@ bci_negotiate_settlement_interaction = {
 	target_filter = actor_domain_titles
 
 
-	is_valid = {
+	is_shown = {
 		has_ep3_dlc_trigger = yes
 		scope:actor = { is_landed = yes }
 		scope:recipient = {
@@ -2169,8 +2169,8 @@ bci_alert_sexsual = {
 	on_accept = {
 		scope:recipient = {
 			if = {
-				limit = { scope:heterosexual = yes }
-				set_sexuality = heterosexual
+				limit = { scope:homosexual = yes }
+				set_sexuality = homosexual
 			}
 			else_if = {
 				limit = { scope:bisexual = yes }

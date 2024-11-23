@@ -5,6 +5,7 @@
  bci_add_piety: "Add 1000 piety"
  bci_add_prestige: "Add 1000 prestige"
  bci_add_dynasty_prestige: "Add 1000 dynasty prestige"
+ bci_add_legitimacy: "Add 1000 legitimacy"
  bci_add_weight: "Add 10 weight"
  bci_sub_weight: "Sub 10 weight"
  bci_add_age: "Add 1 year old"
