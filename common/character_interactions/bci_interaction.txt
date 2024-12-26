@@ -43,9 +43,15 @@ bci_change_religion = {
 
 	on_accept = {
 		scope:recipient = {
-			set_character_faith_with_conversion = scope:actor.faith
-			capital_province.county = {
-				set_county_faith = scope:actor.faith
+			if = {
+				limit = { NOT = { scope:actor.faith = scope:recipient.faith } }
+				set_character_faith_with_conversion = scope:actor.faith
+			}
+			if = {
+				limit = { is_landed = yes }
+				capital_province.county = {
+					set_county_faith = scope:actor.faith
+				}
 			}
 			if = {
 				limit = { scope:bci_faith = yes }
@@ -56,8 +62,11 @@ bci_change_religion = {
 				every_vassal = {
 					limit = { primary_title.tier >= tier_county }
 					set_character_faith_with_conversion = scope:actor.faith
-					capital_province.county = {
-						set_county_faith = scope:actor.faith
+					if = {
+						limit = { is_landed = yes }
+						capital_province.county = {
+							set_county_faith = scope:actor.faith
+						}
 					}
 					every_courtier = {
 						limit = { is_close_family_of = prev }
@@ -90,9 +99,15 @@ bci_change_culture = {
 
 	on_accept = {
 		scope:recipient = {
-			set_culture = scope:actor.culture
-			capital_province.county = {
-				set_county_culture = scope:actor.culture
+			if = {
+				limit = { NOT = { scope:actor.culture = scope:recipient.culture	 } }
+				set_culture = scope:actor.culture
+			}
+			if = {
+				limit = { is_landed = yes }
+				capital_province.county = {
+					set_county_culture = scope:actor.culture
+				}
 			}
 			if = {
 				limit = { scope:vassal = yes }
@@ -103,8 +118,11 @@ bci_change_culture = {
 				every_vassal = {
 					limit = { primary_title.tier >= tier_county }
 					set_culture = scope:actor.culture
-					capital_province.county = {
-						set_county_culture = scope:actor.culture
+					if = {
+						limit = { is_landed = yes }
+						capital_province.county = {
+							set_county_culture = scope:actor.culture
+						}
 					}
 					every_courtier = {
 						limit = { is_close_family_of = prev }
@@ -128,11 +146,7 @@ bci_switch_character = {
 		scope:actor = {
 			is_ai = no
 		}
-		scope:recipient = {
-			is_ai = yes
-			is_ruler = yes
-			primary_title.tier >= tier_county
-		}
+		NOT = { scope:recipient = scope:actor }
 	}
 
 	on_accept = {
@@ -357,95 +371,51 @@ bci_child = {
 		}
 		scope:recipient = {
 			is_adult = yes
-			is_female = yes
 			age >= 18
 		}
 	}
 	on_accept = {
 		scope:recipient = {
-			random_list = {
-				50 = {
-					if = {
-						limit = { scope:recipient = { patrilinear_marriage = yes } }
-						create_character = {
-							age = 0
-							location = primary_spouse.capital_province
-							mother = scope:recipient
-							father = primary_spouse
-							dynasty_house = primary_spouse.house
-							culture = primary_spouse.culture
-							faith = primary_spouse.faith
-							gender = female
-						}
-					}
-					else = {
-						if = {
-							limit = { exists = primary_spouse }
-							create_character = {
-								age = 0
-								location = capital_province
-								mother = scope:recipient
-								father = primary_spouse
-								dynasty_house = house
-								culture = culture
-								faith = faith
-								gender = female
-							}
-						}
-						else = {
-							create_character = {
-								age = 0
-								location = capital_province
-								mother = scope:recipient
-								dynasty_house = house
-								culture = culture
-								faith = faith
-								gender = female
-							}
-						}
-					}
+			if = {
+				limit = { exists = capital_province }
+				save_scope_as = child_location
+			}
+			else_if = {
+				limit = { exists = liege }
+				liege.capital_province = { save_scope_as = child_location }
+			}
+			else = {
+				scope:actor.capital_province = { save_scope_as = child_location }
+			}
+			if = {
+				limit = { is_female = yes }
+				save_scope_as = mother
+				if = {
+					limit = { exists = primary_spouse }
+					primary_spouse = { save_scope_as = father }
 				}
-				50 = {
-					if = {
-						limit = { patrilinear_marriage = yes }
-						create_character = {
-							age = 0
-							location = primary_spouse.capital_province
-							mother = scope:recipient
-							father = primary_spouse
-							dynasty_house = primary_spouse.house
-							culture = primary_spouse.culture
-							faith = primary_spouse.faith
-							gender = male
-						}
-					}
-					else = {
-						if = {
-							limit = { exists = primary_spouse }
-							create_character = {
-								age = 0
-								location = capital_province
-								mother = scope:recipient
-								father = primary_spouse
-								dynasty_house = house
-								culture = culture
-								faith = faith
-								gender = male
-							}
-						}
-						else = {
-							create_character = {
-								age = 0
-								location = capital_province
-								mother = scope:recipient
-								dynasty_house = house
-								culture = culture
-								faith = faith
-								gender = male
-							}
-						}
-					}
+			}
+			else = {
+				save_scope_as = father
+				if = {
+					limit = { exists = primary_spouse }
+					primary_spouse = { save_scope_as = mother }
 				}
+			}
+			create_character = {
+				age = 0
+				location = scope:child_location
+				mother = scope:mother
+				father = scope:father
+				dynasty_house = house
+				culture = culture
+				faith = faith
+				gender_female_chance = 50
+				save_scope_as = child
+			}
+			if = {
+				limit = { OR = { has_trait = sbs_succubus has_trait = sbs_lesser_succubus has_trait = sbs_demon } }
+				scope:child = { add_trait = deviant_blood }
 			}
 		}
 	}
@@ -469,6 +439,7 @@ bci_add_character = {
 		}
 		scope:actor = {
 			is_ai = no
+			is_ruler = yes
 		}
 	}
 
@@ -489,6 +460,7 @@ bci_imprison = {
 		NOT = { scope:recipient = scope:actor }
 		scope:actor = {
 			is_ai = no
+			is_ruler = yes
 		}
 	}
 
@@ -518,6 +490,7 @@ bci_vassal_inter = {
 		}
 		scope:actor = {
 			is_ai = no
+			is_ruler = yes
 		}
 	}
 
@@ -2044,6 +2017,48 @@ bci_fame_trait = {
 	}
 }
 
+bci_create_seed_of_destruction = {
+	icon = lesser_devil
+	use_diplomatic_range = no
+	is_shown = {
+		scope:recipient = {
+			is_female = no
+		}
+		scope:actor = {
+			is_ai = no
+		}
+	}
+	on_accept = {
+		scope:recipient = {
+			remove_trait = immortal
+			add_trait = seed_of_destruction
+			set_immortal_age = 40
+		}
+	}
+	auto_accept = yes
+}
+
+bci_create_immortal = {
+	icon = lesser_devil
+	use_diplomatic_range = no
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+	}
+	on_accept = {
+		scope:recipient = {
+			remove_trait = sbs_succubus
+			remove_trait = sbs_lesser_succubus
+			remove_trait = deviant_virgin
+			remove_trait = seed_of_destruction
+			add_trait = immortal
+			set_immortal_age = 18
+		}
+	}
+	auto_accept = yes
+}
+
 bci_create_lesser_succubus = {
 	icon = lesser_devil
 	use_diplomatic_range = no
@@ -2051,13 +2066,16 @@ bci_create_lesser_succubus = {
 		scope:recipient = {
 			is_female = yes
 		}
-		scope:actor = { OR = { has_trait = sbs_succubus has_trait = sbs_lesser_succubus has_trait = sbs_demon } }
+		scope:actor = {
+			is_ai = no
+		}
 	}
 	on_accept = {
 		scope:recipient = {
 			remove_trait = sbs_succubus
 			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
+			remove_trait = immortal
 			mind_break_personality = yes
 			add_trait = sbs_lesser_succubus
 			set_immortal_age = 18
@@ -2074,13 +2092,16 @@ bci_create_succubus = {
 		scope:recipient = {
 			is_female = yes
 		}
-		scope:actor = { OR = { has_trait = sbs_succubus has_trait = sbs_lesser_succubus has_trait = sbs_demon } }
+		scope:actor = {
+			is_ai = no
+		}
 	}
 	on_accept = {
 		scope:recipient = {
 			remove_trait = sbs_succubus
 			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
+			remove_trait = immortal
 			mind_break_personality = yes
 			add_trait = sbs_succubus
 			set_immortal_age = 18
