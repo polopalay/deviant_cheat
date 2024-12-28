@@ -413,10 +413,6 @@ bci_child = {
 				gender_female_chance = 50
 				save_scope_as = child
 			}
-			if = {
-				limit = { OR = { has_trait = sbs_succubus has_trait = sbs_lesser_succubus has_trait = sbs_demon } }
-				scope:child = { add_trait = deviant_blood }
-			}
 		}
 	}
 	auto_accept = yes
@@ -1891,6 +1887,10 @@ bci_fame_trait = {
 		flag = witch
 		localization = trait_witch
 	}
+	send_option = {
+		flag = bastard
+		localization = trait_bastard
+	}
 	on_accept = {
 		scope:recipient = {
 			if = {
@@ -2013,6 +2013,14 @@ bci_fame_trait = {
 				}
 				else = { remove_trait = witch }
 			}
+			else_if = {
+				limit = { scope:bastard = yes }
+				if = {
+					limit = { NOT = { has_trait = bastard } }
+					add_trait = bastard
+				}
+				else = { remove_trait = bastard }
+			}
 		}
 	}
 }
@@ -2048,6 +2056,7 @@ bci_create_immortal = {
 	}
 	on_accept = {
 		scope:recipient = {
+			remove_trait = sbs_demon
 			remove_trait = sbs_succubus
 			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
@@ -2072,6 +2081,7 @@ bci_create_lesser_succubus = {
 	}
 	on_accept = {
 		scope:recipient = {
+			remove_trait = sbs_demon
 			remove_trait = sbs_succubus
 			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
@@ -2098,6 +2108,7 @@ bci_create_succubus = {
 	}
 	on_accept = {
 		scope:recipient = {
+			remove_trait = sbs_demon
 			remove_trait = sbs_succubus
 			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
@@ -2114,6 +2125,28 @@ bci_create_succubus = {
 	auto_accept = yes
 }
 
+bci_create_demon = {
+	icon = lesser_devil
+	use_diplomatic_range = no
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+	}
+	on_accept = {
+		scope:recipient = {
+			remove_trait = sbs_demon
+			remove_trait = sbs_succubus
+			remove_trait = sbs_lesser_succubus
+			remove_trait = deviant_virgin
+			remove_trait = seed_of_destruction
+			remove_trait = immortal
+			add_trait = sbs_demon
+			set_immortal_age = 40
+		}
+	}
+	auto_accept = yes
+}
 
 bci_have_sex = {
 	icon = lover
