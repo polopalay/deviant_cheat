@@ -1026,13 +1026,13 @@ bci_remove_status = {
 			remove_trait = inappetetic
 			stress_impact = { base = massive_stress_impact_loss }
 
-			remove_trait = bastard
-			remove_trait = legitimized_bastard
-			remove_trait = disputed_heritage
-			remove_trait = child_of_concubine_female
-			remove_trait = child_of_concubine_male
-			remove_trait = wild_oat
-			remove_trait = bastard_founder
+			#remove_trait = bastard
+			#remove_trait = legitimized_bastard
+			#remove_trait = disputed_heritage
+			#remove_trait = child_of_concubine_female
+			#remove_trait = child_of_concubine_male
+			#remove_trait = wild_oat
+			#remove_trait = bastard_founder
 
 			if = {
 				limit = {
