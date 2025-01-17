@@ -22,6 +22,27 @@ bci_change = {
 	}
 }
 
+bci_copy_dna = {
+	icon = full_body_hair_interaction
+	common_interaction = yes
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+		NOT = { scope:recipient = scope:actor }
+	}
+
+	on_send = {
+		scope:recipient = {
+			copy_inheritable_appearance_from = scope:actor
+		}
+	}
+}
+
 bci_change_religion = {
 	icon = demand_conversion_interaction
 	auto_accept = yes
@@ -479,9 +500,7 @@ bci_vassal_inter = {
 	is_shown = {
 		NOT = { scope:recipient = scope:actor }
 		scope:recipient = {
-			is_landed = yes
 			highest_held_title_tier < scope:actor.highest_held_title_tier
-			NOT = { government_has_flag = can_not_be_vassal_or_liege }
 			NOT = { is_vassal_of = scope:actor }
 		}
 		scope:actor = {
@@ -508,9 +527,6 @@ bci_revoke_character = {
 
 	is_shown = {
 		NOT = { scope:actor = scope:recipient }
-		scope:recipient = {
-			is_landed = yes
-		}
 		scope:actor = {
 			is_ai = no
 		}
@@ -1727,7 +1743,30 @@ bci_lifestyle_trait = {
 		flag = lifestyle_gardener
 		localization = trait_lifestyle_gardener
 	}
-
+	send_option = {
+		flag = beauty_bad
+		localization = trait_beauty_bad
+	}
+	send_option = {
+		flag = intellect_bad
+		localization = trait_intellect_bad
+	}
+	send_option = {
+		flag = physique_bad
+		localization = trait_physique_bad
+	}
+	send_option = {
+		flag = beauty_good
+		localization = trait_beauty_good
+	}
+	send_option = {
+		flag = intellect_good
+		localization = trait_intellect_good
+	}
+	send_option = {
+		flag = physique_good
+		localization = trait_physique_good
+	}
 	on_accept = {
 		scope:recipient = {
 			if = {
@@ -1812,6 +1851,72 @@ bci_lifestyle_trait = {
 				}
 				else = { remove_trait = lifestyle_gardener }
 			}
+			esle_if = {
+				limit = { scope:beauty_bad = yes }
+				set_trait_rank = { trait = beauty_good rank = 0 }
+				if = {
+					limit = { has_trait_rank = { trait = physique_good rank = 3 } }
+					set_trait_rank = { trait = beauty_bad rank = 0 }
+				}
+				else = {
+					change_trait_rank = { trait = beauty_bad rank = 1 }
+				}
+			}
+			else_if = {
+				limit = { scope:intellect_bad = yes }
+				set_trait_rank = { trait = intellect_good rank = 0 }
+				if = {
+					limit = { has_trait_rank = { trait = intellect_good rank = 3 } }
+					set_trait_rank = { trait = intellect_bad rank = 0 }
+				}
+				else = {
+					change_trait_rank = { trait = intellect_bad rank = 1 }
+				}
+			}
+			else_if = {
+				limit = { scope:physique_bad = yes }
+				set_trait_rank = { trait = physique_good rank = 0 }
+				if = {
+					limit = { has_trait_rank = { trait = physique_good rank = 3 } }
+					set_trait_rank = { trait = physique_bad rank = 0 }
+				}
+				else = {
+					change_trait_rank = { trait = physique_bad rank = 1 }
+				}
+			}
+			else_if = {
+				limit = { scope:beauty_good = yes }
+				set_trait_rank = { trait = beauty_bad rank = 0 }
+				if = {
+					limit = { has_trait_rank = { trait = physique_bad rank = 3 } }
+					set_trait_rank = { trait = beauty_good rank = 0 }
+				}
+				else = {
+					change_trait_rank = { trait = beauty_good rank = 1 }
+				}
+			}
+			else_if = {
+				limit = { scope:intellect_good = yes }
+				set_trait_rank = { trait = intellect_bad rank = 0 }
+				if = {
+					limit = { has_trait_rank = { trait = intellect_bad rank = 3 } }
+					set_trait_rank = { trait = intellect_good rank = 0 }
+				}
+				else = {
+					change_trait_rank = { trait = intellect_good rank = 1 }
+				}
+			}
+			else_if = {
+				limit = { scope:physique_good = yes }
+				set_trait_rank = { trait = physique_bad rank = 0 }
+				if = {
+					limit = { has_trait_rank = { trait = physique_bad rank = 3 } }
+					set_trait_rank = { trait = physique_good rank = 0 }
+				}
+				else = {
+					change_trait_rank = { trait = physique_good rank = 1 }
+				}
+			}
 		}
 	}
 }
@@ -1890,6 +1995,62 @@ bci_fame_trait = {
 	send_option = {
 		flag = bastard
 		localization = trait_bastard
+	}
+	send_option = {
+		flag = sodomite
+		localization = trait_sodomite
+	}
+	send_option = {
+		flag = incestuous
+		localization = trait_incestuous
+	}
+	send_option = {
+		flag = born_in_the_purple
+		localization = trait_born_in_the_purple
+	}
+	send_option = {
+		flag = disinherited
+		localization = trait_disinherited
+	}
+	send_option = {
+		flag = denounced
+		localization = trait_denounced
+	}
+	send_option = {
+		flag = decadent
+		localization = trait_decadent
+	}
+	send_option = {
+		flag = slave
+		localization = trait_slave
+	}
+	send_option = {
+		flag = loyal
+		localization = trait_loyal
+	}
+	send_option = {
+		flag = disloyal
+		localization = trait_disloyal
+	}
+	send_option = {
+		flag = education_intrigue
+		localization = trait_education_intrigue
+	}
+	send_option = {
+		flag = education_diplomacy
+		localization = trait_education_diplomacy
+	}
+	send_option = {
+		flag = education_stewardship
+		localization = trait_education_stewardship
+	}
+	send_option = {
+		flag = education_martial
+		localization = trait_education_martial
+	}
+	send_option = {
+		flag = education_learning
+		localization = trait_education_learning
 	}
 	on_accept = {
 		scope:recipient = {
@@ -2021,6 +2182,120 @@ bci_fame_trait = {
 				}
 				else = { remove_trait = bastard }
 			}
+			else_if = {
+				limit = { scope:sodomite = yes }
+				if = {
+					limit = { NOT = { has_trait = sodomite } }
+					add_trait = sodomite
+				}
+				else = { remove_trait = sodomite }
+			}
+			else_if = {
+				limit = { scope:incestuous = yes }
+				if = {
+					limit = { NOT = { has_trait = incestuous } }
+					add_trait = incestuous
+				}
+				else = { remove_trait = incestuous }
+			}
+			else_if = {
+				limit = { scope:born_in_the_purple = yes }
+				if = {
+					limit = { NOT = { has_trait = born_in_the_purple } }
+					add_trait = born_in_the_purple
+				}
+				else = { remove_trait = born_in_the_purple }
+			}
+			else_if = {
+				limit = { scope:disinherited = yes }
+				if = {
+					limit = { NOT = { has_trait = disinherited } }
+					add_trait = disinherited
+				}
+				else = { remove_trait = disinherited }
+			}
+			else_if = {
+				limit = { scope:denounced = yes }
+				if = {
+					limit = { NOT = { has_trait = denounced } }
+					add_trait = denounced
+				}
+				else = { remove_trait = denounced }
+			}
+			else_if = {
+				limit = { scope:decadent = yes }
+				if = {
+					limit = { NOT = { has_trait = decadent } }
+					add_trait = decadent
+				}
+				else = { remove_trait = decadent }
+			}
+			else_if = {
+				limit = { scope:slave = yes }
+				if = {
+					limit = { NOT = { has_trait = slave } }
+					add_trait = slave
+				}
+				else = { remove_trait = slave }
+			}
+			else_if = {
+				limit = { scope:loyal = yes }
+				if = {
+					limit = { NOT = { has_trait = loyal } }
+					remove_trait = disloyal
+					add_trait = loyal
+				}
+				else = { remove_trait = loyal }
+			}
+			else_if = {
+				limit = { scope:disloyal = yes }
+				if = {
+					limit = { NOT = { has_trait = disloyal } }
+					remove_trait = loyal
+					add_trait = disloyal
+				}
+				else = { remove_trait = disloyal }
+			}
+			else_if = {
+				limit = { scope:education_intrigue = yes }
+				if = {
+					limit = { has_trait_rank = { trait = education_intrigue rank < 5 } }
+					change_trait_rank = { trait = education_intrigue rank = 1 }
+				}
+				else = { set_trait_rank = { trait = education_intrigue rank = 0 } }
+			}
+			else_if = {
+				limit = { scope:education_diplomacy = yes }
+				if = {
+					limit = { has_trait_rank = { trait = education_diplomacy rank < 5 } }
+					change_trait_rank = { trait = education_diplomacy rank = 1 }
+				}
+				else = { set_trait_rank = { trait = education_diplomacy rank = 0 } }
+			}
+			else_if = {
+				limit = { scope:education_stewardship = yes }
+				if = {
+					limit = { has_trait_rank = { trait = education_stewardship rank < 5 } }
+					change_trait_rank = { trait = education_stewardship rank = 1 }
+				}
+				else = { set_trait_rank = { trait = education_stewardship rank = 0 } }
+			}
+			else_if = {
+				limit = { scope:education_martial = yes }
+				if = {
+					limit = { has_trait_rank = { trait = education_martial rank < 5 } }
+					change_trait_rank = { trait = education_martial rank = 1 }
+				}
+				else = { set_trait_rank = { trait = education_martial rank = 0 } }
+			}
+			else_if = {
+				limit = { scope:education_learning = yes }
+				if = {
+					limit = { has_trait_rank = { trait = education_learning rank < 5 } }
+					change_trait_rank = { trait = education_learning rank = 1 }
+				}
+				else = { set_trait_rank = { trait = education_learning rank = 0 } }
+			}
 		}
 	}
 }
@@ -2142,7 +2417,7 @@ bci_create_demon = {
 			remove_trait = seed_of_destruction
 			remove_trait = immortal
 			add_trait = sbs_demon
-			set_immortal_age = 40
+			set_immortal_age = 18
 		}
 	}
 	auto_accept = yes
@@ -2158,7 +2433,7 @@ bci_have_sex = {
 	}
 	on_accept = {
 		scope:recipient = {
-			prostitute_effect= { PROSTITUTE = scope:actor PREGNANCY_CHANCE = 100 }
+			had_sex_with_effect = { CHARACTER = scope:actor PREGNANCY_CHANCE = 100 }
 		}
 	}
 	auto_accept = yes
