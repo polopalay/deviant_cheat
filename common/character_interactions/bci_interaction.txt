@@ -654,6 +654,7 @@ bci_remove_rivals = {
 		scope:actor = { is_ai = no }
 		scope:recipient = {
 			any_relation = { type = rival }
+			any_relation = { type = nemesis }
 		}
 	}
 
@@ -662,6 +663,10 @@ bci_remove_rivals = {
 			every_relation = {
 				type = rival
 				remove_relation_rival = prev
+			}
+			every_relation = {
+				type = nemesis
+				remove_relation_nemesis = prev
 			}
 		}
 	}
@@ -2331,12 +2336,12 @@ bci_create_immortal = {
 	}
 	on_accept = {
 		scope:recipient = {
+			add_trait = immortal
 			remove_trait = sbs_demon
 			remove_trait = sbs_succubus
 			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
 			remove_trait = seed_of_destruction
-			add_trait = immortal
 			set_immortal_age = 18
 		}
 	}
