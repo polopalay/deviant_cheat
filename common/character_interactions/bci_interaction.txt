@@ -22,6 +22,27 @@ bci_change = {
 	}
 }
 
+bci_set_house_head = {
+	icon = grant_vassal_interaction
+	auto_accept = yes
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+			is_house_head = no
+		}
+		scope:actor = scope:recipient
+	}
+
+	on_accept = {
+		scope:actor.house = {
+			set_house_head = scope:actor
+		}
+	}
+}
+
 bci_copy_dna = {
 	icon = full_body_hair_interaction
 	common_interaction = yes
@@ -1986,6 +2007,10 @@ bci_fame_trait = {
 		localization = trait_poet
 	}
 	send_option = {
+		flag = devoted
+		localization = trait_devoted
+	}
+	send_option = {
 		flag = deviant
 		localization = trait_deviant
 	}
@@ -2156,6 +2181,14 @@ bci_fame_trait = {
 				else = { remove_trait = poet }
 			}
 			else_if = {
+				limit = { scope:devoted = yes }
+				if = {
+					limit = { NOT = { has_trait = devoted } }
+					add_trait = devoted
+				}
+				else = { remove_trait = devoted }
+			}
+			else_if = {
 				limit = { scope:deviant = yes }
 				if = {
 					limit = { NOT = { has_trait = deviant } }
@@ -2306,7 +2339,7 @@ bci_fame_trait = {
 }
 
 bci_create_seed_of_destruction = {
-	icon = lesser_devil
+	icon = sbs_create_lesser_succubus_interaction
 	use_diplomatic_range = no
 	is_shown = {
 		scope:recipient = {
@@ -2319,7 +2352,8 @@ bci_create_seed_of_destruction = {
 	on_accept = {
 		scope:recipient = {
 			remove_trait = immortal
-			add_trait = seed_of_destruction
+			remove_trait = sbs_demon
+			add_trait = sbs_seed_of_destruction
 			set_immortal_age = 40
 		}
 	}
@@ -2327,7 +2361,7 @@ bci_create_seed_of_destruction = {
 }
 
 bci_create_immortal = {
-	icon = lesser_devil
+	icon = sbs_create_lesser_succubus_interaction
 	use_diplomatic_range = no
 	is_shown = {
 		scope:actor = {
@@ -2341,7 +2375,7 @@ bci_create_immortal = {
 			remove_trait = sbs_succubus
 			remove_trait = sbs_lesser_succubus
 			remove_trait = deviant_virgin
-			remove_trait = seed_of_destruction
+			remove_trait = sbs_seed_of_destruction
 			set_immortal_age = 18
 		}
 	}
@@ -2349,7 +2383,7 @@ bci_create_immortal = {
 }
 
 bci_create_lesser_succubus = {
-	icon = lesser_devil
+	icon = sbs_create_lesser_succubus_interaction
 	use_diplomatic_range = no
 	is_shown = {
 		scope:recipient = {
@@ -2376,7 +2410,7 @@ bci_create_lesser_succubus = {
 }
 
 bci_create_succubus = {
-	icon = devil
+	icon = sbs_create_succubus_interaction
 	use_diplomatic_range = no
 	is_shown = {
 		scope:recipient = {
@@ -2406,7 +2440,7 @@ bci_create_succubus = {
 }
 
 bci_create_demon = {
-	icon = lesser_devil
+	icon = sbs_create_succubus_interaction
 	use_diplomatic_range = no
 	is_shown = {
 		scope:actor = {
@@ -2418,8 +2452,7 @@ bci_create_demon = {
 			remove_trait = sbs_demon
 			remove_trait = sbs_succubus
 			remove_trait = sbs_lesser_succubus
-			remove_trait = deviant_virgin
-			remove_trait = seed_of_destruction
+			remove_trait = sbs_seed_of_destruction
 			remove_trait = immortal
 			add_trait = sbs_demon
 			set_immortal_age = 18
